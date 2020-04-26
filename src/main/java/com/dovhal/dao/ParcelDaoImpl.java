@@ -5,6 +5,7 @@ import com.dovhal.model.Parcel;
 import com.dovhal.util.DBConnectionUtility;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class ParcelDaoImpl implements ParcelDao {
 
     public void updateParcel(Parcel parcel) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
-            String query = "UPDATE parcels SET senderName=?, recipientName=?, startCity=?, endCity=?,weight=? " +
+            String query = "UPDATE parcels SET senderName=?, recipientName=?, startCity=?, endCity=?, weight=? " +
                     "WHERE parcelID=?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, parcel.getSenderName());
@@ -61,13 +62,13 @@ public class ParcelDaoImpl implements ParcelDao {
     }
 
     public List<Parcel> getAllParcels() {
-        List<Parcel> parcelList = new LinkedList<>();
+        List<Parcel> parcelList = new ArrayList<>();
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM parcels");
             while (resultSet.next()) {
                 Parcel parcel = new Parcel();
-                parcel.setId(resultSet.getInt("parcelID"));
+                parcel.setId(resultSet.getInt("parcelId"));
                 parcel.setSenderName(resultSet.getString("senderName"));
                 parcel.setRecipientName(resultSet.getString("recipientName"));
                 parcel.setStartCity(resultSet.getString("startCity"));
@@ -84,12 +85,12 @@ public class ParcelDaoImpl implements ParcelDao {
     public Parcel getParcelById(int id) {
         Parcel parcel = new Parcel();
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
-            String query = "SELECT * FROM parcels WHERE parcelID=?";
+            String query = "SELECT * FROM parcels WHERE parcelId=?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                parcel.setId(resultSet.getInt("parcelID"));
+                parcel.setId(resultSet.getInt("parcelId"));
                 parcel.setSenderName(resultSet.getString("senderName"));
                 parcel.setRecipientName(resultSet.getString("recipientName"));
                 parcel.setStartCity(resultSet.getString("startCity"));

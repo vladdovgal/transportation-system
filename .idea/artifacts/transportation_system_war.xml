@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="transportation-system-1.0-SNAPSHOT.war">
+    <root id="archive" name="crudApp.war">
       <element id="artifact" artifact-name="transportation-system:war exploded" />
     </root>
   </artifact>

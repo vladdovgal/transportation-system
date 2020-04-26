@@ -2,6 +2,7 @@ package com.dovhal.model;
 
 /**
  * Parcel.java represents entity "parcel"
+ *
  * @author vladd
  */
 public class Parcel {
@@ -11,9 +12,9 @@ public class Parcel {
 
     private String recipientName;
 
-    private City startCity;
+    private String startCity;
 
-    private City endCity;
+    private String endCity;
 
     private double weight;
 
@@ -41,19 +42,19 @@ public class Parcel {
         this.recipientName = recipientName;
     }
 
-    public City getStartCity() {
+    public String getStartCity() {
         return startCity;
     }
 
-    public void setStartCity(City startCity) {
-        this.startCity = startCity;
-    }
-
-    public City getEndCity() {
+    public String getEndCity() {
         return endCity;
     }
 
-    public void setEndCity(City endCity) {
+    public void setStartCity(String startCity) {
+        this.startCity = startCity;
+    }
+
+    public void setEndCity(String endCity) {
         this.endCity = endCity;
     }
 
@@ -76,4 +77,5 @@ public class Parcel {
                 ", weight=" + weight +
                 '}';
     }
+
 }

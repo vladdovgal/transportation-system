@@ -9,9 +9,9 @@ public interface ParcelDao {
 
     void deleteParcel(int id);
 
-    void updateParcel(int ind);
+    void updateParcel(Parcel parcel);
 
     List<Parcel> getAllParcels();
 
-    Parcel getParcelById();
+    Parcel getParcelById(int id);
 }

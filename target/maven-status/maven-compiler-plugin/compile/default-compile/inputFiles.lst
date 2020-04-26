@@ -1,0 +1,6 @@
+/home/vladd/IdeaProjects/transportation-system/src/main/java/com/dovhal/model/Parcel.java
+/home/vladd/IdeaProjects/transportation-system/src/main/java/com/dovhal/servlet/ParcelServlet.java
+/home/vladd/IdeaProjects/transportation-system/src/main/java/com/dovhal/dao/ParcelDaoImpl.java
+/home/vladd/IdeaProjects/transportation-system/src/main/java/com/dovhal/model/City.java
+/home/vladd/IdeaProjects/transportation-system/src/main/java/com/dovhal/dao/ParcelDao.java
+/home/vladd/IdeaProjects/transportation-system/src/main/java/com/dovhal/util/DBConnectionUtility.java

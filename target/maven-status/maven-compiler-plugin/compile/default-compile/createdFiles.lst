@@ -1,0 +1,6 @@
+com/dovhal/model/Parcel.class
+com/dovhal/util/DBConnectionUtility.class
+com/dovhal/dao/ParcelDaoImpl.class
+com/dovhal/model/City.class
+com/dovhal/servlet/ParcelServlet.class
+com/dovhal/dao/ParcelDao.class

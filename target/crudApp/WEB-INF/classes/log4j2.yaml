@@ -1,0 +1,28 @@
+Configuration:
+  packages: "com.dovhal.dao"
+  name: Log4j2_Config
+  properties:
+    property:
+      name: log-path
+      value: logs
+  #---------------------------------------------------------
+  appenders:
+    #    console appender
+    Console:
+      name: Console_Appender
+#      Filters:
+#        ThresholdFilter:
+#          level: all
+#          onMatch: deny
+#          onMismatch: neutral
+      PatternLayout:
+        Pattern: "%highlight{%-5level}{FATAL=bg_red} %style{%date{yyyy-MM-dd
+                 HH:mm:ss}}{blue} %class{1}:%L - %highlight{%msg} %xEx{short}%n"
+  #-------------
+  Loggers:
+    Logger:
+      name: com.dovhal.dao.ParcelDaoImpl
+      level: all
+      AppenderRef:
+        ref: Console_Appender
+        level: all

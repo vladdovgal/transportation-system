@@ -4,6 +4,8 @@ import com.dovhal.dao.ParcelDao;
 import com.dovhal.dao.ParcelDaoImpl;
 import com.dovhal.model.City;
 import com.dovhal.model.Parcel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

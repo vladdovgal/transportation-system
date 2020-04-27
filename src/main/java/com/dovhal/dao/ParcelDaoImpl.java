@@ -1,14 +1,20 @@
 package com.dovhal.dao;
 
+import com.dovhal.App;
 import com.dovhal.model.City;
 import com.dovhal.model.Parcel;
 import com.dovhal.util.DBConnectionUtility;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
+
 import java.util.List;
 import java.util.Random;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
 
 /**
  * ParcelDaoImpl.java is a class, which implements ParcelDao
@@ -17,20 +23,25 @@ import java.util.Random;
  * @author vladd
  */
 public class ParcelDaoImpl implements ParcelDao {
+    //    initializing Logger entity
+    public static Logger logger = LogManager.getLogger();
 
     public void createParcel(Parcel parcel) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
             String query = "INSERT INTO parcels (parcelId,senderName,recipientName,startCity,endCity,weight)" +
                     "VALUES (?,?,?,?,?,?)";
             Random random = new Random();
+            int parcelGeneratedId =  Integer.parseInt(String.format("%06d", random.nextInt(999999)));
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, Integer.parseInt(String.format("%06d", random.nextInt(999999))));
+            preparedStatement.setInt(1,parcelGeneratedId);
             preparedStatement.setString(2, parcel.getSenderName());
             preparedStatement.setString(3, parcel.getRecipientName());
             preparedStatement.setString(4, parcel.getStartCity());
             preparedStatement.setString(5, parcel.getEndCity());
             preparedStatement.setDouble(6, parcel.getWeight());
             preparedStatement.executeUpdate();
+
+            logger.info("Parcel №" + parcelGeneratedId + " created");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -42,6 +53,7 @@ public class ParcelDaoImpl implements ParcelDao {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
+            logger.info("Parcel №" + id + " deleted");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -59,6 +71,7 @@ public class ParcelDaoImpl implements ParcelDao {
             preparedStatement.setDouble(5, parcel.getWeight());
             preparedStatement.setInt(6, parcel.getId());
             preparedStatement.executeUpdate();
+            logger.info("Parcel №" + parcel.getId() + " updated; Parcel info: " + parcel.toString());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

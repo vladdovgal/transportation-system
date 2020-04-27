@@ -54,8 +54,8 @@
                 <label for="startCity" class="col-2 col-form-label">City-Sender</label>
                 <div class="col-10">
                     <select name="startCity" id="startCity">
-                        <option value="none" selected disabled hidden>
-                            Select an Option
+                        <option value="${parcel.startCity.toString()}" selected hidden>
+                            ${parcel.startCity}
                         </option>
                         <c:forEach items="${cities}" var="city">
                             <option value="${city.toString()}">${city}</option>
@@ -67,8 +67,8 @@
                 <label for="endCity" class="col-2 col-form-label">City-Recipient</label>
                 <div class="col-10">
                     <select name="endCity" id="endCity">
-                        <option value="none" selected disabled hidden>
-                            Select an Option
+                        <option value="${parcel.endCity.toString()}" selected hidden>
+                            ${parcel.endCity}
                         </option>
                         <c:forEach items="${cities}" var="city">
                             <option value="${city.toString()}">${city}</option>
@@ -88,7 +88,6 @@
 
             <div>
                 <button type="submit" class="btn btn-primary">Submit</button>
-<%--    <b href="ParcelServlet.do?action=listParcel" type="submit" class="btn btn-primary">Submit</b>--%>
             </div>
 
         </form>

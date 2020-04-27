@@ -8,6 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * ParcelDaoImpl.java is a class, which implements ParcelDao
@@ -19,14 +20,16 @@ public class ParcelDaoImpl implements ParcelDao {
 
     public void createParcel(Parcel parcel) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
-            String query = "INSERT INTO parcels (senderName,recipientName,startCity,endCity,weight)" +
-                    "VALUES (?,?,?,?,?)";
+            String query = "INSERT INTO parcels (parcelId,senderName,recipientName,startCity,endCity,weight)" +
+                    "VALUES (?,?,?,?,?,?)";
+            Random random = new Random();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, parcel.getSenderName());
-            preparedStatement.setString(2, parcel.getRecipientName());
-            preparedStatement.setString(3, parcel.getStartCity());
-            preparedStatement.setString(4, parcel.getEndCity());
-            preparedStatement.setDouble(5, parcel.getWeight());
+            preparedStatement.setInt(1, Integer.parseInt(String.format("%06d", random.nextInt(999999))));
+            preparedStatement.setString(2, parcel.getSenderName());
+            preparedStatement.setString(3, parcel.getRecipientName());
+            preparedStatement.setString(4, parcel.getStartCity());
+            preparedStatement.setString(5, parcel.getEndCity());
+            preparedStatement.setDouble(6, parcel.getWeight());
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -1,16 +1,18 @@
 package com.dovhal.dao;
 
-import com.dovhal.App;
+//import com.dovhal.App;
 import com.dovhal.model.City;
 import com.dovhal.model.Parcel;
 import com.dovhal.util.DBConnectionUtility;
 
+import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Random;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,7 +26,8 @@ import org.apache.logging.log4j.Logger;
  */
 public class ParcelDaoImpl implements ParcelDao {
     //    initializing Logger entity
-    public static Logger logger = LogManager.getLogger();
+    public static Logger logger = LogManager.getLogger(ParcelDaoImpl.class);
+
 
     public void createParcel(Parcel parcel) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {

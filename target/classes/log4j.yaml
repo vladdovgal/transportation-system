@@ -1,0 +1,130 @@
+Configuration:
+  packages: "com.dovhal"
+  name: Log4j2_Config
+  properties:
+    property:
+      name: log-path
+      value: logs
+  #---------------------------------------------------------
+  appenders:
+#    console appender
+    Console:
+      name: Console_Appender
+      Filters:
+        ThresholdFilter:
+          level: fatal
+          onMatch: deny
+          onMismatch: neutral
+      PatternLayout:
+        Pattern: "%highlight{%-5level}{FATAL=bg_red} %style{%date{yyyy-MM-dd
+                 HH:mm:ss}}{blue} %class{1}:%L - %highlight{%msg} %xEx{short}%n"
+#        file appender
+#        file WILL NOT BE OVERRIDDEN
+    File:
+      name: rootLogFile
+      fileName: ${log-path}/rootFile.log
+      Filters:
+        ThresholdFilter:
+          level: fatal
+          onMatch: deny
+          onMismatch: neutral
+      PatternLayout:
+        Pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} %class{1}:%L - %msg
+                  %xEx{short}%n"
+
+    SMTP:
+      name: MailAppender
+      Filters:
+        ThresholdFilter:
+          level: fatal
+          onMatch: accept
+          onMismatch: deny
+      subject: "Error Log"
+      to: "primatlpnu@gmail.com"
+      from: "vladdovgal@gmail.com"
+      smtpHost: "smtp.gmail.com"
+      smtpPort: 465
+      smtpProtocol: smtps
+      smtpUsername: "vladdovgal@gmail.com"
+      smtpPassword: "skleroz1499"
+      bufferSize: 50
+      HTMLLayout:
+        charset: "UTF-8"
+        title: "Logs from VladDov"
+
+
+#      sms
+    SMS:
+      name: SMSsender
+      Filters:
+        ThresholdFilter:
+          level: fatal
+          onMatch: accept
+          onMismatch: deny
+      PatternLayout:
+        Pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss} - %msg %xEx{short}"
+#      Async:
+#        name: AsyncSMS
+#        AppenderRef:
+#         ref: SMSsender
+
+
+
+#         file will be overwritten after reaching the size of 500 KB
+#    RollingFile:
+#      # file will be overwritten after reaching the size of 500 KB
+#      name: rolFile1
+#      fileName: ${log-path}/rollingFile1.log
+#      filePattern: ${log-path}/archive/rolFile1.%d{yyyy-MM-dd-hh-mm}.log
+#      PatternLayout:
+#        Pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} %class{1}:%L - %msg
+#                  %xEx{short}%n"
+#      Policies:
+#        SizeBasedTriggeringPolicy:
+#          size: 1 KB
+
+
+#    RollingFile:
+#      # file will be overwritten every day
+#      name: rolFile1
+#      fileName: ${log-path}/rollingFile1.log
+#      filePattern: ${log-path}/archive/rolFile1.%d{yyyy-MM-dd-hh-mm}.log
+#      PatternLayout:
+#        Pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} %class{1}:%L - %msg
+#                      %xEx{short}%n"
+#      Policies:
+#        TimeBasedTriggeringPolicy:
+#          interval: 1
+#          modulate: true
+
+#       CRON TRIGGERING
+#    RollingFile:
+#      # file will be overwritten at 15:40 every day
+#      name: rolFile1
+#      fileName: ${log-path}/rollingFile1.log
+#      filePattern: ${log-path}/archive/rolFileCron.%d{yyyy-MM-dd-hh-mm}.log
+#      PatternLayout:
+#        Pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} %class{1}:%L - %msg
+#                          %xEx{short}%n"
+#      Policies:
+#        CronTriggeringPolicy:
+#          schedule: "0 40 15 ? * *"
+#          evaluateOnStartup: true
+#        DefaultRolloverStrategy:
+#          max: 1
+
+  #---------------------------------------------------------
+  Loggers:
+    Logger:
+      name: com.dovhal.Main
+      level: all
+      AppenderRef:
+        ref: Console_Appender
+        level: all
+    Root:
+      level: all
+      AppenderRef:
+        ref: MailAppender
+        level: error
+
+

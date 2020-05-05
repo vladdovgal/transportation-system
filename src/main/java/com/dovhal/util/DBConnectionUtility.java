@@ -4,8 +4,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class DBConnectionUtility {
+    public static Logger logger = LogManager.getLogger(DBConnectionUtility.class);
+
     public static Connection getDBConnection(){
         Connection result = null;
 
@@ -20,29 +24,22 @@ public class DBConnectionUtility {
 
         try {
             Class.forName(DRIVER_CLASS_NAME).getDeclaredConstructor().newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace(); //replace with logging
-        } catch (InvocationTargetException e) {
+        } catch (Exception e){
             e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            errorLog("Can't get JDBC Driver");
         }
 
         try {
             result = DriverManager.getConnection(DB_CONN_URL,USER_NAME,USER_PASSWORD);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            System.out.println("Can't connect to DB");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            errorLog("Can't connect to DB");
         }
 
         return result;
     }
 
-    private static void log(Object eObject){
-        // write logging (Log4J)
+    private static void errorLog(String message){
+        logger.error(message + " | See stacktrace above!");
     }
 }

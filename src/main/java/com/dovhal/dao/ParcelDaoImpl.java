@@ -1,20 +1,15 @@
 package com.dovhal.dao;
 
-//import com.dovhal.App;
-import com.dovhal.model.City;
+
 import com.dovhal.model.Parcel;
 import com.dovhal.util.DBConnectionUtility;
-
-import java.io.FileNotFoundException;
-import java.sql.*;
-import java.util.ArrayList;
-
-import java.util.List;
-import java.util.Random;
-
-import org.apache.log4j.PropertyConfigurator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 
 
@@ -56,6 +51,7 @@ public class ParcelDaoImpl implements ParcelDao {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
+
             logger.info("Parcel №" + id + " deleted");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -74,6 +70,7 @@ public class ParcelDaoImpl implements ParcelDao {
             preparedStatement.setDouble(5, parcel.getWeight());
             preparedStatement.setInt(6, parcel.getId());
             preparedStatement.executeUpdate();
+
             logger.info("Parcel №" + parcel.getId() + " updated; Parcel info: " + parcel.toString());
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -1,17 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="INFO">
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration status="info">
     <Appenders>
-        <Console name="LogToConsole" target="SYSTEM_OUT">
-            <PatternLayout pattern= "%highlight{%-5level}{FATAL=bg_red} %style{%date{yyyy-MM-dd
-                 HH:mm:ss}}{blue} %class{1}:%L - %highlight{%msg} %xEx{short}%n"/>
+
+        <Console name="Console">
+            <PatternLayout pattern="%highlight{%-5level}{FATAL=bg_red} %style{%date{yyyy-MM-dd HH:mm:ss}}{blue} %class{1}:%L - %highlight{%msg} %xEx{short}%n" />
         </Console>
+
+        <File name="MyFile" fileName="logs/app.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+
+
     </Appenders>
+
     <Loggers>
-        <Logger name="com.dovhal" level="debug" additivity="false">
-            <AppenderRef ref="LogToConsole"/>
+
+        <Logger name="com.dovhal" level="info" additivity="true" >
+            <AppenderRef ref="MyFile" />
         </Logger>
-        <Root level="error">
-            <AppenderRef ref="LogToConsole"/>
+
+        <Root level="info">
+            <AppenderRef ref="Console" />
         </Root>
+
     </Loggers>
 </Configuration>

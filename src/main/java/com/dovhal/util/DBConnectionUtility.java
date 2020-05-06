@@ -12,14 +12,10 @@ public class DBConnectionUtility {
 
     public static Connection getDBConnection(){
         Connection result = null;
-
         String DB_CONN_URL = "jdbc:mysql://localhost:3306/transportation" +
                 "?useUnicode=true&serverTimezone=UTC&useSSL=false";
-
         String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver"; // remove "cj" if using 7 ore lower MYSQL version
-
         String USER_NAME = "root";
-
         String USER_PASSWORD = "Skleroz123_";
 
         try {

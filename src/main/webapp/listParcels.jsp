@@ -34,10 +34,10 @@
                 <td><c:out value="${parcel.startCity}"/></td>
                 <td><c:out value="${parcel.endCity}"/></td>
                 <td><c:out value="${parcel.weight}"/></td>
-                <td><a class="btn btn-primary" role="button"
+                <td><a class="btn btn-dark" role="button" style="padding-left:10px;"
                         <c:out value="16+64*2"/>
                        href="ParcelServlet.do?action=edit&parcelId=<c:out value="${parcel.id }"/>">Update</a>
-                    <a class="btn btn-primary" role="button" style="padding-left:5px;"
+                    <a class="btn btn-danger" role="button" style="padding-left:10px;"
                        href="ParcelServlet.do?action=delete&parcelId=<c:out value="${parcel.id }"/>">Delete</a>
 
                 </td>

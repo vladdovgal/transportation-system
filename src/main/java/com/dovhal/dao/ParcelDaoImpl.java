@@ -39,7 +39,8 @@ public class ParcelDaoImpl implements ParcelDao {
             preparedStatement.setDouble(6, parcel.getWeight());
             preparedStatement.executeUpdate();
 
-            logger.info("Parcel №" + parcelGeneratedId + " created");
+            logParcelInfo("Parcel №" + parcelGeneratedId + " from " + parcel.getStartCity().toString() +
+                    " to " + parcel.getEndCity().toString() + " created");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -47,12 +48,14 @@ public class ParcelDaoImpl implements ParcelDao {
 
     public void deleteParcel(int id) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
+            Parcel parcel = getParcelById(id);
             String query = "DELETE FROM parcels WHERE parcelID = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
 
-            logger.info("Parcel №" + id + " deleted");
+            logParcelInfo("Parcel №" + id + " from " + parcel.getStartCity().toString() +
+                    " to " + parcel.getEndCity().toString() + " deleted");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -71,7 +74,7 @@ public class ParcelDaoImpl implements ParcelDao {
             preparedStatement.setInt(6, parcel.getId());
             preparedStatement.executeUpdate();
 
-            logger.info("Parcel №" + parcel.getId() + " updated; Parcel info: " + parcel.toString());
+            logParcelInfo("Parcel №" + parcel.getId() + " updated; Parcel info: " + parcel.toString());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -117,5 +120,9 @@ public class ParcelDaoImpl implements ParcelDao {
             throwables.printStackTrace();
         }
         return parcel;
+    }
+
+    public void logParcelInfo(String message){
+        logger.info(message);
     }
 }

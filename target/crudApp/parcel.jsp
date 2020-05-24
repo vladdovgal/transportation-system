@@ -88,10 +88,14 @@
             <div class="row">
                 <div class="col-2">
                     <button type="button" class="btn btn-secondary"
-                    onclick="window.location = 'ParcelServlet.do?action=list_parcels'">Cancel</button>
+                            onclick="window.location = 'ParcelServlet.do?action=list_parcels'">Cancel
+                    </button>
                 </div>
                 <div class="col-2">
-                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button onclick="window.location = 'ParcelServlet.do?action=list_parcels'"
+                    type="submit" class="btn btn-success"
+                            >Submit
+                    </button>
                 </div>
             </div>
 

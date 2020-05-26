@@ -5,7 +5,7 @@ package com.dovhal.model;
  *
  * @author vladd
  */
-public class Parcel {
+public class Parcel extends Entity{
     private int id;
 
     private String senderName;

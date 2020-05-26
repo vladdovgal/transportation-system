@@ -1,11 +1,8 @@
 package com.dovhal.servlet;
 
-import com.dovhal.dao.ParcelDao;
+//import com.dovhal.dao.EntityDAO;
 import com.dovhal.dao.ParcelDaoImpl;
-import com.dovhal.model.City;
 import com.dovhal.model.Parcel;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,24 +20,24 @@ public class ParcelServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     public static final String lIST_PARCEL = "/listParcels.jsp";
     public static final String INSERT_OR_EDIT = "/parcel.jsp";
-    private ParcelDao dao = new ParcelDaoImpl();
+    private ParcelDaoImpl dao = new ParcelDaoImpl();
 
 
-    @Override
+    @Override       
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String forward = "";
         String action = req.getParameter("action");
-        List<City> cityList = Arrays.asList(City.values());
+        List<String> cityList = Arrays.asList("Lviv","Kyiv","Ternopil");
 
         if (action.equalsIgnoreCase("delete")) {
             forward = lIST_PARCEL;
             int parcelId = Integer.parseInt(req.getParameter("parcelId"));
-            dao.deleteParcel(parcelId);
-            req.setAttribute("parcels", dao.getAllParcels());
+            dao.deleteEntity(parcelId);
+            req.setAttribute("parcels", dao.getAllEntities());
         } else if (action.equalsIgnoreCase("edit")) {
             forward = INSERT_OR_EDIT;
             int parcelId = Integer.parseInt(req.getParameter("parcelId"));
-            Parcel parcel = dao.getParcelById(parcelId);
+            Parcel parcel = dao.getEntityById(parcelId);
             req.setAttribute("parcel", parcel);
             req.setAttribute("cities", cityList);
         } else if (action.equalsIgnoreCase("insert")) {
@@ -48,7 +45,7 @@ public class ParcelServlet extends HttpServlet {
             req.setAttribute("cities", cityList);
         } else {
             forward = lIST_PARCEL;
-            req.setAttribute("parcels", dao.getAllParcels());
+            req.setAttribute("parcels", dao.getAllEntities());
         }
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(forward);
         requestDispatcher.forward(req, resp);
@@ -65,13 +62,13 @@ public class ParcelServlet extends HttpServlet {
        String parcelId = req.getParameter("parcelId");
 
        if (parcelId == null || parcelId.isEmpty()){
-           dao.createParcel(parcel);
+           dao.createEntity(parcel);
        } else {
            parcel.setId(Integer.parseInt(parcelId));
-           dao.updateParcel(parcel);
+           dao.updateEntity(parcel);
        }
        RequestDispatcher requestDispatcher = req.getRequestDispatcher(lIST_PARCEL);
-       req.setAttribute("parcels",dao.getAllParcels());
+       req.setAttribute("parcels",dao.getAllEntities());
        requestDispatcher.forward(req,resp);
     }
 }

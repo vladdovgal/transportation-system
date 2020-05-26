@@ -92,13 +92,9 @@
                     </button>
                 </div>
                 <div class="col-2">
-                    <button onclick="window.location = 'ParcelServlet.do?action=list_parcels'"
-                    type="submit" class="btn btn-success"
-                            >Submit
-                    </button>
+                    <button type="submit" class="btn btn-success">Submit</button>
                 </div>
             </div>
-
         </form>
     </div>
 </div>

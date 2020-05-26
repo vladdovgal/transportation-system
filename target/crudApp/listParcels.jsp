@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container container-default">
-    <h1>Parcel List Page</h1>
+    <h1>Parcels List Page</h1>
     <table class="table table-striped">
         <thead>
         <tr>

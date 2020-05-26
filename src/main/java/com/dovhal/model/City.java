@@ -1,11 +1,15 @@
 package com.dovhal.model;
 
-public class City extends Entity{
+public class City extends Entity {
     private int id;
 
     private String cityName;
 
     private String cityAlias;
+
+    public City() {
+
+    }
 
     public City(int id, String cityName, String cityAlias) {
         this.id = id;

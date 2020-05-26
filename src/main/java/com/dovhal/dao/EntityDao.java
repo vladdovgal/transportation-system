@@ -18,4 +18,6 @@ public interface EntityDao {
     List<? extends Entity> getAllEntities();
 
     <T extends Entity> T getEntityById(int id);
+
+    void logEntityInfo(String message);
 }

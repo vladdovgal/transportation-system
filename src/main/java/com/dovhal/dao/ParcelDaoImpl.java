@@ -4,8 +4,6 @@ package com.dovhal.dao;
 import com.dovhal.model.Entity;
 import com.dovhal.model.Parcel;
 import com.dovhal.util.DBConnectionUtility;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,6 +19,7 @@ import java.util.Random;
  */
 public class ParcelDaoImpl implements EntityDao {
 
+    @Override
     public <T extends Entity> void createEntity(T entity) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
             String query = "INSERT INTO parcels (parcelId,senderName,recipientName,startCity,endCity,weight)" +
@@ -37,7 +36,7 @@ public class ParcelDaoImpl implements EntityDao {
             preparedStatement.setDouble(6, parcel.getWeight());
             preparedStatement.executeUpdate();
 
-            logParcelInfo("Parcel №" + parcelGeneratedId + " from " + parcel.getStartCity().toString() +
+            logEntityInfo("Parcel №" + parcelGeneratedId + " from " + parcel.getStartCity().toString() +
                     " to " + parcel.getEndCity().toString() + " created");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -45,7 +44,7 @@ public class ParcelDaoImpl implements EntityDao {
         }
     }
 
-
+    @Override
     public void deleteEntity(int id) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
             Parcel parcel = getEntityById(id);
@@ -54,13 +53,14 @@ public class ParcelDaoImpl implements EntityDao {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
 
-            logParcelInfo("Parcel №" + id + " from " + parcel.getStartCity().toString() +
+            logEntityInfo("Parcel №" + id + " from " + parcel.getStartCity().toString() +
                     " to " + parcel.getEndCity().toString() + " deleted");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
 
+    @Override
     public <T extends Entity> void updateEntity(T entity) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
             String query = "UPDATE parcels SET senderName=?, recipientName=?, startCity=?, endCity=?, weight=? " +
@@ -75,12 +75,13 @@ public class ParcelDaoImpl implements EntityDao {
             preparedStatement.setInt(6, parcel.getId());
             preparedStatement.executeUpdate();
 
-            logParcelInfo("Parcel №" + parcel.getId() + " updated; Parcel info: " + parcel.toString());
+            logEntityInfo("Parcel №" + parcel.getId() + " updated; Parcel info: " + parcel.toString());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
 
+    @Override
     public List<Parcel> getAllEntities() {
         List<Parcel> parcelList = new ArrayList<>();
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
@@ -102,6 +103,7 @@ public class ParcelDaoImpl implements EntityDao {
         return parcelList;
     }
 
+    @Override
     public Parcel getEntityById(int id) {
         Parcel parcel = new Parcel();
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
@@ -123,7 +125,8 @@ public class ParcelDaoImpl implements EntityDao {
         return parcel;
     }
 
-    public void logParcelInfo(String message) {
+    @Override
+    public void logEntityInfo(String message) {
         logger.info(message);
     }
 }

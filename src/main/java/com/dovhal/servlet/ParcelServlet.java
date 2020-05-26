@@ -27,7 +27,7 @@ public class ParcelServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String forward = "";
         String action = req.getParameter("action");
-        List<String> cityList = Arrays.asList("Lviv","Kyiv","Ternopil");
+        List<String> cityList = Arrays.asList("Lviv","Kyiv","Ternopil","Odessa","Poltava");
 
         if (action.equalsIgnoreCase("delete")) {
             forward = lIST_PARCEL;

@@ -1,0 +1,27 @@
+table {
+    font-size: 1.4em;
+}
+
+
+a {
+    color: snow;
+    font-weight: bold;
+}
+a:link.top-toolbar-item {
+    background-color: cadetblue;
+    color: black;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
+}
+
+a:hover.top-toolbar-item, a:active.top-toolbar-item {
+    background-color: thistle;
+    color: black;
+}
+
+.header {
+    margin-top: 15px;
+}

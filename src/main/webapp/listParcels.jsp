@@ -5,15 +5,35 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>All Parcels</title>
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+    <link rel="stylesheet" type="text/css"
+          href="css/style.css">
 </head>
 <body>
-<div class="container container-default">
-    <h1>Parcels List Page</h1>
-    <table class="table table-striped">
+<div class="col-12">
+    <div class="">
+        <div class="row header">
+            <div class="col-3">
+                <h1>Parcels List Page</h1>
+            </div>
+            <div class="col-1">
+                <a href="ParcelServlet.do?action=listParcels" class="top-toolbar-item">PARCELS</a>
+            </div>
+            <div class="col-1">
+                <a href="CityServlet.do?action=listCities" class="top-toolbar-item">CITIES</a>
+            </div>
+            <div class="col-7">
+
+            </div>
+        </div>
+    </div>
+
+
+    <table class="table table-striped col-12">
         <thead>
         <tr>
             <th>Parcel ID</th>
@@ -34,11 +54,14 @@
                 <td><c:out value="${parcel.startCity}"/></td>
                 <td><c:out value="${parcel.endCity}"/></td>
                 <td><c:out value="${parcel.weight}"/></td>
-                <td><a class="btn btn-dark" role="button" style="padding-left:10px;"
-                        <c:out value="16+64*2"/>
-                       href="ParcelServlet.do?action=edit&parcelId=<c:out value="${parcel.id }"/>">Update</a>
-                    <a class="btn btn-danger" role="button" style="padding-left:10px;"
-                       href="ParcelServlet.do?action=delete&parcelId=<c:out value="${parcel.id }"/>">Delete</a>
+                <td>
+                    <button type="button" class="btn btn-dark btn-lg">
+                        <a href="ParcelServlet.do?action=edit&parcelId=<c:out value="${parcel.id }"/>">Update</a>
+                    </button>
+
+                    <button type="button" class="btn btn-danger btn-lg">
+                        <a href="ParcelServlet.do?action=delete&parcelId=<c:out value="${parcel.id }"/>">Delete</a>
+                    </button>
 
                 </td>
 
@@ -46,8 +69,8 @@
         </c:forEach>
         </tbody>
     </table>
-    <p>
-        <a href="ParcelServlet.do?action=insert" class="btn btn-primary" role="button">Create Parcel</a>
-    </p>
+    <button type="button" class="btn btn-primary btn-lg">
+        <a href="ParcelServlet.do?action=insert">Create Parcel</a>
+    </button>
 </div>
 </body>

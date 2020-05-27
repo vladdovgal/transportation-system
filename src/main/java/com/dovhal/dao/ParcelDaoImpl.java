@@ -4,6 +4,7 @@ package com.dovhal.dao;
 import com.dovhal.model.City;
 import com.dovhal.model.Entity;
 import com.dovhal.model.Parcel;
+import com.dovhal.model.Status;
 import com.dovhal.util.DBConnectionUtility;
 
 import java.sql.*;
@@ -23,21 +24,24 @@ public class ParcelDaoImpl implements EntityDao {
     @Override
     public <T extends Entity> void createEntity(T entity) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
-            String query = "INSERT INTO parcels (parcelId,senderName,recipientName,startCity,endCity,weight)" +
-                    "VALUES (?,?,?,?,?,?)";
+            String query = "INSERT INTO parcels (parcelId,senderName,recipientName,startCity,endCity,weight,status)" +
+                    "VALUES (?,?,?,?,?,?,?)";
             Random random = new Random();
-            int parcelGeneratedId = Integer.parseInt(String.format("%04d", random.nextInt(9999)));
+            int rand = Integer.parseInt(String.format("%05d", random.nextInt(99999)));
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, parcelGeneratedId);
             Parcel parcel = (Parcel) entity;
+            String id = parcel.getStartCity().substring(0,2).toUpperCase()
+                    + rand + parcel.getEndCity().substring(0,2).toUpperCase();
+            preparedStatement.setString(1, id);
             preparedStatement.setString(2, parcel.getSenderName());
             preparedStatement.setString(3, parcel.getRecipientName());
             preparedStatement.setString(4, parcel.getStartCity());
             preparedStatement.setString(5, parcel.getEndCity());
             preparedStatement.setDouble(6, parcel.getWeight());
+            preparedStatement.setString(7, parcel.getStatus());
             preparedStatement.executeUpdate();
 
-            logEntityInfo("Parcel №" + parcelGeneratedId + " from " + parcel.getStartCity().toString() +
+            logEntityInfo("Parcel №" + rand + " from " + parcel.getStartCity().toString() +
                     " to " + parcel.getEndCity().toString() + " created");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -46,12 +50,12 @@ public class ParcelDaoImpl implements EntityDao {
     }
 
     @Override
-    public void deleteEntity(int id) {
+    public void deleteEntity(String id) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
             Parcel parcel = getEntityById(id);
             String query = "DELETE FROM parcels WHERE parcelID = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setString(1, id);
             preparedStatement.executeUpdate();
 
             logEntityInfo("Parcel №" + id + " from " + parcel.getStartCity().toString() +
@@ -64,7 +68,7 @@ public class ParcelDaoImpl implements EntityDao {
     @Override
     public <T extends Entity> void updateEntity(T entity) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
-            String query = "UPDATE parcels SET senderName=?, recipientName=?, startCity=?, endCity=?, weight=? " +
+            String query = "UPDATE parcels SET senderName=?, recipientName=?, startCity=?, endCity=?, weight=? , status=?" +
                     "WHERE parcelID=?";
             Parcel parcel = (Parcel) entity;
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -73,7 +77,9 @@ public class ParcelDaoImpl implements EntityDao {
             preparedStatement.setString(3, parcel.getStartCity());
             preparedStatement.setString(4, parcel.getEndCity());
             preparedStatement.setDouble(5, parcel.getWeight());
-            preparedStatement.setInt(6, parcel.getId());
+            preparedStatement.setString(6, parcel.getStatus());
+            preparedStatement.setString(7, parcel.getId());
+
             preparedStatement.executeUpdate();
 
             logEntityInfo("Parcel №" + parcel.getId() + " updated; Parcel info: " + parcel.toString());
@@ -89,13 +95,14 @@ public class ParcelDaoImpl implements EntityDao {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM parcels");
             while (resultSet.next()) {
-                Parcel parcel = new Parcel();
-                parcel.setId(resultSet.getInt("parcelId"));
+                    Parcel parcel = new Parcel();
+                parcel.setId(resultSet.getString("parcelId"));
                 parcel.setSenderName(resultSet.getString("senderName"));
                 parcel.setRecipientName(resultSet.getString("recipientName"));
                 parcel.setStartCity(resultSet.getString("startCity"));
                 parcel.setEndCity(resultSet.getString("endCity"));
                 parcel.setWeight(resultSet.getDouble("weight"));
+                parcel.setStatus(resultSet.getString("status"));
                 parcelList.add(parcel);
             }
         } catch (SQLException throwables) {
@@ -105,20 +112,21 @@ public class ParcelDaoImpl implements EntityDao {
     }
 
     @Override
-    public Parcel getEntityById(int id) {
+    public Parcel getEntityById(String id) {
         Parcel parcel = new Parcel();
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
             String query = "SELECT * FROM parcels WHERE parcelId=?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setString(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                parcel.setId(resultSet.getInt("parcelId"));
+                parcel.setId(resultSet.getString("parcelId"));
                 parcel.setSenderName(resultSet.getString("senderName"));
                 parcel.setRecipientName(resultSet.getString("recipientName"));
                 parcel.setStartCity(resultSet.getString("startCity"));
                 parcel.setEndCity(resultSet.getString("endCity"));
                 parcel.setWeight(resultSet.getDouble("weight"));
+                parcel.setStatus(resultSet.getString("status"));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -134,7 +142,7 @@ public class ParcelDaoImpl implements EntityDao {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()){
                 City city = new City();
-                city.setId(resultSet.getInt("cityId"));
+                city.setId(resultSet.getString("cityId"));
                 city.setCityName(resultSet.getString("cityName"));
                 city.setCityAlias(resultSet.getString("cityAlias"));
                 cityList.add(city);

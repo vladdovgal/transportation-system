@@ -1,3 +1,6 @@
-- Change parcelId generation on smth like LV18672KY
-- Cover project with UnitTests
++ Change parcelId generation on smth like LV18672KY
+- Cover project with UnitTests (up to 80%)
 - Follow code convention
++ Add feature of changing parcel's status
+- Add progress-bar of parcel status
+- Restrict changing sender's city after creating parcel entity

@@ -28,12 +28,12 @@ public class CityDaoImpl implements EntityDao {
     }
 
     @Override
-    public void deleteEntity(int id) {
+    public void deleteEntity(String id) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
             String query = "DELETE FROM cities WHERE cityId = ?";
             City city = getEntityById(id);
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setString(1, id);
             preparedStatement.executeUpdate();
             logEntityInfo("City named " + city.getCityName() + " was removed");
         } catch (SQLException throwables) {
@@ -52,7 +52,7 @@ public class CityDaoImpl implements EntityDao {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, city.getCityName());
             preparedStatement.setString(2, city.getCityAlias());
-            preparedStatement.setInt(3, city.getId());
+            preparedStatement.setString(3, city.getId());
             preparedStatement.executeUpdate();
 
             logEntityInfo("City with id = " + city.getId() + " was updated");
@@ -71,28 +71,28 @@ public class CityDaoImpl implements EntityDao {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 City city = new City();
-                city.setId(resultSet.getInt("cityId"));
+                city.setId(resultSet.getString("cityId"));
                 city.setCityName(resultSet.getString("cityName"));
                 city.setCityAlias(resultSet.getString("cityAlias"));
                 cityList.add(city);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            logger.error("Caught SQLException; Something went wrong while displaying all entities");
+            logger.error("Caught SQLException; Something went wrong while displaying all cities");
         }
         return cityList;
     }
 
     @Override
-    public City getEntityById(int id) {
+    public City getEntityById(String id) {
         City city = new City();
         try(Connection connection = DBConnectionUtility.getDBConnection()) {
             String query = "SELECT * FROM cities WHERE cityId = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setString(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                city.setId(resultSet.getInt("cityId"));
+                city.setId(resultSet.getString("cityId"));
                 city.setCityName(resultSet.getString("cityName"));
                 city.setCityAlias(resultSet.getString("cityAlias"));
             }

@@ -47,6 +47,7 @@
                     <label for="cityName" class="col-4 col-form-label">Name of the City</label>
                     <div class="col-8">
                         <input class="form-control"
+                               required
                                type="text"
                                name="cityName"
                                value="<c:out value="${city.cityName}"/>"

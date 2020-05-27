@@ -11,13 +11,13 @@ public interface EntityDao {
 
     <T extends Entity> void createEntity(T entity);
 
-    void deleteEntity(int id);
+    void deleteEntity(String id);
 
     <T extends Entity> void updateEntity(T entity);
 
     List<? extends Entity> getAllEntities();
 
-    <T extends Entity> T getEntityById(int id);
+    <T extends Entity> T getEntityById(String id);
 
     void logEntityInfo(String message);
 }

@@ -1,7 +1,7 @@
 package com.dovhal.model;
 
 public class City extends Entity {
-    private int id;
+    private String id;
 
     private String cityName;
 
@@ -11,17 +11,17 @@ public class City extends Entity {
 
     }
 
-    public City(int id, String cityName, String cityAlias) {
+    public City(String id, String cityName, String cityAlias) {
         this.id = id;
         this.cityName = cityName;
         this.cityAlias = cityAlias;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

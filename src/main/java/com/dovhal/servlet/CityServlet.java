@@ -25,12 +25,12 @@ public class CityServlet extends HttpServlet {
 
         if (action.equalsIgnoreCase("delete")) {
             forward = LIST_CITY;
-            int cityId = Integer.parseInt(req.getParameter("cityId"));
+            String cityId = req.getParameter("cityId");
             dao.deleteEntity(cityId);
             req.setAttribute("cities", dao.getAllEntities());
         } else if (action.equalsIgnoreCase("edit")) {
             forward = INSERT_OR_EDIT;
-            int cityId = Integer.parseInt(req.getParameter("cityId"));
+            String cityId = req.getParameter("cityId");
             City city = dao.getEntityById(cityId);
             req.setAttribute("city", city);
         } else if (action.equalsIgnoreCase("insert")) {
@@ -54,7 +54,7 @@ public class CityServlet extends HttpServlet {
         if (cityId == null || cityId.isEmpty()){
             dao.createEntity(city);
         } else {
-            city.setId(Integer.parseInt(cityId));
+            city.setId(cityId);
             dao.updateEntity(city);
         }
 

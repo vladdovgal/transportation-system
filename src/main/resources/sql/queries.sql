@@ -4,12 +4,12 @@ CREATE DATABASE transportation;
 USE transportation ;
 
 CREATE TABLE parcels (
-	parcelId INT(8) NOT NULL auto_increment,
+	parcelId VARCHAR (15) NOT NULL auto_increment,
     senderName VARCHAR(25) DEFAULT NULL,
     recipientName VARCHAR(25) DEFAULT NULL,
     startCity VARCHAR(20) DEFAULT NULL,
 	endCity VARCHAR(20) DEFAULT NULL,
-    weight FLOAT(5) DEFAULT NULL,
+    weight FLOAT(5) DEFAULT 1,
     PRIMARY KEY(parcelID));
 
 CREATE TABLE cities(

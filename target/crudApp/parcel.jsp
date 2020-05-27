@@ -42,29 +42,31 @@
                     <label for="senderName" class="col-4 col-form-label">Sender Name</label>
                     <div class="col-8">
                         <input class="form-control"
+                               required
                                type="text"
                                name="senderName"
                                value="<c:out value="${parcel.senderName}"/>"
                                id="senderName"
-                               placeholder="Input">
+                               placeholder="Enter name. For example: Jay">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="recipientName" class="col-4 col-form-label">Recipient Name</label>
                     <div class="col-8">
                         <input class="form-control"
+                               required
                                type="text"
                                name="recipientName"
                                value="<c:out value="${parcel.recipientName}"/>"
                                id="recipientName"
-                               placeholder="recipientName">
+                               placeholder="Enter name. For example: Jay">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="startCity" class="col-4 col-form-label">City-Sender</label>
                     <div class="col-8">
-                        <select name="startCity" id="startCity">
+                        <select required name="startCity" id="startCity">
                             <option value="${parcel.startCity.toString()}" selected hidden>
                                 ${parcel.startCity}
                             </option>
@@ -77,7 +79,7 @@
                 <div class="form-group row">
                     <label for="endCity" class="col-4 col-form-label">City-Recipient</label>
                     <div class="col-8">
-                        <select name="endCity" id="endCity">
+                        <select required name="endCity" id="endCity">
                             <option value="${parcel.endCity.toString()}" selected hidden>
                                 ${parcel.endCity}
                             </option>
@@ -92,14 +94,31 @@
                     <label for="weight" class="col-4 col-form-label">Weight</label>
                     <div class="col-8">
                         <input class="form-control"
+                               required
                                type="number"
-                               step="0.01"
+                               step="0.1"
                                name="weight"
                                value="<c:out value="${parcel.weight}"/>"
                                id="weight"
-                               placeholder="Weight">
+                               placeholder="Value in kg. Ex: 4.2">
                     </div>
                 </div>
+
+                <div class="form-group row">
+                    <label for="status" class="col-4 col-form-label">Status</label>
+                    <div class="col-8">
+                        <select required name="status" id="status">
+                            <option value="${parcel.status}" selected hidden>
+                                ${parcel.status}
+                            </option>
+                            <c:forEach items="${statuss}" var="status">
+                                <option value="${status}">${status}</option>
+                            </c:forEach>
+
+                        </select>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-2">
                         <button type="submit" class="btn btn-success btn-lg">Submit</button>

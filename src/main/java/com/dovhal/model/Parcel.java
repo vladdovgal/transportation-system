@@ -6,7 +6,7 @@ package com.dovhal.model;
  * @author vladd
  */
 public class Parcel extends Entity{
-    private int id;
+    private String id;
 
     private String senderName;
 
@@ -18,13 +18,14 @@ public class Parcel extends Entity{
 
     private double weight;
 
-    public int getId() {
-        return id;
+    private String status;
+
+    public Parcel() {
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public String getId() { return id; }
+
+    public void setId(String id) { this.id = id; }
 
     public String getSenderName() {
         return senderName;
@@ -64,6 +65,14 @@ public class Parcel extends Entity{
 
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override

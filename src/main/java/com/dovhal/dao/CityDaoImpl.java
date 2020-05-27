@@ -20,7 +20,7 @@ public class CityDaoImpl implements EntityDao {
             preparedStatement.setString(2, city.getCityName().substring(0, 2).toUpperCase());
             preparedStatement.executeUpdate();
 
-            logEntityInfo(city.getCityName() + "City added. Alias: " + city.getCityAlias());
+            logEntityInfo(city.getCityName() + "City added");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             logger.error("Caught SQLException; Something went wrong while creating entity");
@@ -31,12 +31,10 @@ public class CityDaoImpl implements EntityDao {
     public void deleteEntity(int id) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
             String query = "DELETE FROM cities WHERE cityId = ?";
-
+            City city = getEntityById(id);
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
-
-            City city = getEntityById(id);
             logEntityInfo("City named " + city.getCityName() + " was removed");
         } catch (SQLException throwables) {
             throwables.printStackTrace();

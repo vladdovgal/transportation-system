@@ -1,6 +1,8 @@
-table {
+table, form {
     font-size: 1.4em;
 }
+
+
 
 
 a {
@@ -24,4 +26,16 @@ a:hover.top-toolbar-item, a:active.top-toolbar-item {
 
 .header {
     margin-top: 15px;
+}
+
+input, select {
+    margin-top: 10px;
+}
+
+.entity-form {
+    padding-bottom: 40px;
+    margin-top: 20px;
+    padding-top: 40px;
+    box-shadow: 1px 0 19px 0px #2e6da4;
+    font-size: 1.2em;
 }

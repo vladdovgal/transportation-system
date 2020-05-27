@@ -2,6 +2,7 @@ package com.dovhal.servlet;
 
 //import com.dovhal.dao.EntityDAO;
 import com.dovhal.dao.ParcelDaoImpl;
+import com.dovhal.model.City;
 import com.dovhal.model.Parcel;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @WebServlet("/ParcelServlet.do")
@@ -27,7 +29,11 @@ public class ParcelServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String forward = "";
         String action = req.getParameter("action");
-        List<String> cityList = Arrays.asList("Lviv","Kyiv","Ternopil","Odessa","Poltava");
+//        List<String> cityList = Arrays.asList("Lviv","Kyiv","Ternopil","Odessa","Poltava");
+        List<City> cities = dao.getAllCities();
+        List<String> citiesNames = cities.stream()
+                .map(e -> e.getCityName())
+                .collect(Collectors.toList());
 
         if (action.equalsIgnoreCase("delete")) {
             forward = lIST_PARCEL;
@@ -39,10 +45,10 @@ public class ParcelServlet extends HttpServlet {
             int parcelId = Integer.parseInt(req.getParameter("parcelId"));
             Parcel parcel = dao.getEntityById(parcelId);
             req.setAttribute("parcel", parcel);
-            req.setAttribute("cities", cityList);
+            req.setAttribute("cities", citiesNames);
         } else if (action.equalsIgnoreCase("insert")) {
             forward = INSERT_OR_EDIT;
-            req.setAttribute("cities", cityList);
+            req.setAttribute("cities", citiesNames);
         } else {
             forward = lIST_PARCEL;
             req.setAttribute("parcels", dao.getAllEntities());

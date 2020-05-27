@@ -1,0 +1,3 @@
+- Change parcelId generation on smth like LV18672KY
+- Cover project with UnitTests
+- Follow code convention

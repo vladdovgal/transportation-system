@@ -1,6 +1,7 @@
 package com.dovhal.dao;
 
 
+import com.dovhal.model.City;
 import com.dovhal.model.Entity;
 import com.dovhal.model.Parcel;
 import com.dovhal.util.DBConnectionUtility;
@@ -25,7 +26,7 @@ public class ParcelDaoImpl implements EntityDao {
             String query = "INSERT INTO parcels (parcelId,senderName,recipientName,startCity,endCity,weight)" +
                     "VALUES (?,?,?,?,?,?)";
             Random random = new Random();
-            int parcelGeneratedId = Integer.parseInt(String.format("%06d", random.nextInt(999999)));
+            int parcelGeneratedId = Integer.parseInt(String.format("%04d", random.nextInt(9999)));
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, parcelGeneratedId);
             Parcel parcel = (Parcel) entity;
@@ -123,6 +124,25 @@ public class ParcelDaoImpl implements EntityDao {
             throwables.printStackTrace();
         }
         return parcel;
+    }
+
+    public List<City> getAllCities() {
+        List<City> cityList = new ArrayList<>();
+        try(Connection connection = DBConnectionUtility.getDBConnection()) {
+            String query = "SELECT * FROM cities";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                City city = new City();
+                city.setId(resultSet.getInt("cityId"));
+                city.setCityName(resultSet.getString("cityName"));
+                city.setCityAlias(resultSet.getString("cityAlias"));
+                cityList.add(city);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return cityList;
     }
 
     @Override

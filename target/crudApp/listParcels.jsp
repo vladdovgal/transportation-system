@@ -55,22 +55,26 @@
                 <td><c:out value="${parcel.endCity}"/></td>
                 <td><c:out value="${parcel.weight}"/></td>
                 <td>
-                    <button type="button" class="btn btn-dark btn-lg">
-                        <a href="ParcelServlet.do?action=edit&parcelId=<c:out value="${parcel.id }"/>">Update</a>
-                    </button>
-
-                    <button type="button" class="btn btn-danger btn-lg">
-                        <a href="ParcelServlet.do?action=delete&parcelId=<c:out value="${parcel.id }"/>">Delete</a>
-                    </button>
-
+                    <a href="ParcelServlet.do?action=edit&parcelId=<c:out value="${parcel.id }"/>">
+                        <button type="button" class="btn btn-dark btn-lg">
+                            Update
+                        </button>
+                    </a>
+                    <a href="ParcelServlet.do?action=delete&parcelId=<c:out value="${parcel.id }"/>">
+                        <button type="button" class="btn btn-danger btn-lg">
+                            Delete
+                        </button>
+                    </a>
                 </td>
 
             </tr>
         </c:forEach>
         </tbody>
     </table>
-    <button type="button" class="btn btn-primary btn-lg">
-        <a href="ParcelServlet.do?action=insert">Create Parcel</a>
-    </button>
+    <a href="ParcelServlet.do?action=insert">
+        <button type="button" class="btn btn-primary btn-lg">
+            Create Parcel
+        </button>
+    </a>
 </div>
 </body>

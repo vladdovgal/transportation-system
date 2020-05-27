@@ -45,21 +45,26 @@
                 <td><c:out value="${city.cityName}"/></td>
                 <td><c:out value="${city.cityAlias}"/></td>
                 <td>
-                    <button type="button" class="btn btn-dark btn-lg">
-                        <a href="CityServlet.do?action=edit&cityId=<c:out value="${city.id }"/>">Update</a>
-                    </button>
-
-                    <button type="button" class="btn btn-danger btn-lg">
-                        <a href="CityServlet.do?action=delete&cityId=<c:out value="${city.id }"/>">Delete</a>
-                    </button>
+                    <a href="CityServlet.do?action=edit&cityId=<c:out value="${city.id }"/>">
+                        <button type="button" class="btn btn-dark btn-lg">
+                            Update
+                        </button>
+                    </a>
+                    <a href="CityServlet.do?action=delete&cityId=<c:out value="${city.id }"/>">
+                        <button type="button" class="btn btn-danger btn-lg">
+                            Delete
+                        </button>
+                    </a>
                 </td>
 
             </tr>
         </c:forEach>
         </tbody>
     </table>
-    <button type="button" class="btn btn-primary btn-lg">
-        <a href="CityServlet.do?action=insert">Add city</a>
-    </button>
+    <a href="CityServlet.do?action=insert">
+        <button type="button" class="btn btn-primary btn-lg">
+            Add city
+        </button>
+    </a>
 </div>
 </body>

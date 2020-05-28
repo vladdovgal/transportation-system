@@ -78,13 +78,13 @@ public class Parcel extends Entity{
     @Override
     public String toString() {
         return "Parcel{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", senderName='" + senderName + '\'' +
                 ", recipientName='" + recipientName + '\'' +
-                ", startCity=" + startCity +
-                ", endCity=" + endCity +
+                ", startCity='" + startCity + '\'' +
+                ", endCity='" + endCity + '\'' +
                 ", weight=" + weight +
+                ", status='" + status + '\'' +
                 '}';
     }
-
 }

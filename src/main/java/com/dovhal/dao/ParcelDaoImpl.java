@@ -45,7 +45,7 @@ public class ParcelDaoImpl implements EntityDao {
             preparedStatement.setString(7, parcel.getStatus());
             preparedStatement.executeUpdate();
 
-            logEntityInfo("Parcel №" + rand + " from " + parcel.getStartCity().toString() +
+            logEntityInfo("Parcel " + id + " from " + parcel.getStartCity().toString() +
                     " to " + parcel.getEndCity().toString() + " created");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -62,7 +62,7 @@ public class ParcelDaoImpl implements EntityDao {
             preparedStatement.setString(1, id);
             preparedStatement.executeUpdate();
 
-            logEntityInfo("Parcel №" + id + " from " + parcel.getStartCity().toString() +
+            logEntityInfo("Parcel " + id + " from " + parcel.getStartCity().toString() +
                     " to " + parcel.getEndCity().toString() + " deleted");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -86,7 +86,7 @@ public class ParcelDaoImpl implements EntityDao {
 
             preparedStatement.executeUpdate();
 
-            logEntityInfo("Parcel №" + parcel.getId() + " updated; Parcel info: " + parcel.toString());
+            logEntityInfo("Parcel " + parcel.getId() + " updated; Parcel info: " + parcel.toString());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

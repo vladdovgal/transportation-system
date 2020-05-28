@@ -1,8 +1,7 @@
 package com.dovhal.servlet;
 
-import com.dovhal.dao.CityDaoImpl;
+
 import com.dovhal.dao.LogDaoImpl;
-import com.dovhal.model.City;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,7 +22,7 @@ public class LogsServlet extends HttpServlet {
         String forward = "";
         String action = req.getParameter("action");
 
-        if (action.equalsIgnoreCase("logs_list")) {
+        if (action.equalsIgnoreCase("listLogs")) {
             forward = LIST_LOGS;
             req.setAttribute("logs", dao.getAllEntities());
         }

@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>All Cities</title>
+    <title>Event Logs</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
     <link rel="stylesheet"
@@ -33,42 +33,25 @@
         </div>
     </div>
 
-    <table class="table table-striped">
+    <table class="table table-bordered">
         <thead class="thead-dark">
         <tr>
-            <th>City ID</th>
-            <th>City Name</th>
-            <th>City Alias</th>
-            <th colspan="2">Action</th>
+            <th>DATE & TIME</th>
+            <th>LOGGER</th>
+            <th>LEVEL</th>
+            <th>MESSAGE</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${cities}" var="city">
+        <c:forEach items="${logs}" var="log">
             <tr>
-                <td><c:out value="${city.id}"/></td>
-                <td><c:out value="${city.cityName}"/></td>
-                <td><c:out value="${city.cityAlias}"/></td>
-                <td>
-                    <a href="CityServlet.do?action=edit&cityId=<c:out value="${city.id }"/>">
-                        <button type="button" class="btn btn-dark btn-lg">
-                            Update
-                        </button>
-                    </a>
-                    <a href="CityServlet.do?action=delete&cityId=<c:out value="${city.id }"/>">
-                        <button type="button" class="btn btn-danger btn-lg">
-                            Delete
-                        </button>
-                    </a>
-                </td>
-
+                <td><c:out value="${log.dated}"/></td>
+                <td><c:out value="${log.logger}"/></td>
+                <td><c:out value="${log.level}"/></td>
+                <td><c:out value="${log.message}"/></td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
-    <a href="CityServlet.do?action=insert">
-        <button type="button" class="btn btn-primary btn-lg">
-            Add city
-        </button>
-    </a>
 </div>
 </body>

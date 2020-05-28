@@ -15,26 +15,26 @@
 </head>
 <body>
 <div class="col-12">
-    <div class="">
-        <div class="row header">
-            <div class="col-3">
-                <h1>Parcels List Page</h1>
-            </div>
-            <div class="col-1">
-                <a href="ParcelServlet.do?action=listParcels" class="top-toolbar-item">PARCELS</a>
-            </div>
-            <div class="col-1">
-                <a href="CityServlet.do?action=listCities" class="top-toolbar-item">CITIES</a>
-            </div>
-            <div class="col-7">
+    <div class="row header">
+        <div class="col-3">
+            <h1>Cities List Page</h1>
+        </div>
+        <div>
+            <a href="ParcelServlet.do?action=listParcels" class="top-toolbar-item">PARCELS</a>
+        </div>
+        <div>
+            <a href="CityServlet.do?action=listCities" class="top-toolbar-item">CITIES</a>
+        </div>
+        <div>
+            <a href="LogsServlet.do?action=listLogs" class="top-toolbar-item">EVENT LOGS</a>
+        </div>
+        <div>
 
-            </div>
         </div>
     </div>
 
-
-    <table class="table table-striped col-12">
-        <thead>
+    <table class="table col-12">
+        <thead class="thead-dark">
         <tr>
             <th>Parcel ID</th>
             <th>Sender's Name</th>

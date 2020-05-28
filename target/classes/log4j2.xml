@@ -4,7 +4,7 @@
         <JDBC name="databaseAppender" tableName="transportation.LOGS">
             <ConnectionFactory class="com.dovhal.util.DBConnectionUtility"
                                method="getDBConnection" />
-            <Column name="DATED" pattern="%d{dd MMM yyyy HH:mm:ss,SSS}" />
+            <Column name="DATED" pattern="%d{dd MMM yyyy HH:mm:ss}" />
             <Column name="LOGGER" pattern="%logger" />
             <Column name="LEVEL" pattern="%level" />
             <Column name="MESSAGE" pattern="%message" />

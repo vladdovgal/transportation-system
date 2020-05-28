@@ -14,6 +14,8 @@ a:link.top-toolbar-item {
     text-decoration: none;
     display: inline-block;
     font-weight: bold;
+    width: 230px;
+    margin-right: 20px;
 }
 
 a:hover.top-toolbar-item, a:active.top-toolbar-item {

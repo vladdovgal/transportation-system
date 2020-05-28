@@ -4,3 +4,5 @@
 + Add feature of changing parcel's status
 - Add progress-bar of parcel status
 - Restrict changing sender's city after creating parcel entity
++ Add JDBC Logger
+- Add page to display logs

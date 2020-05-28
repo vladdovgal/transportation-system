@@ -7,8 +7,6 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 public interface EntityDao {
-    Logger logger = LogManager.getLogger(ParcelDaoImpl.class);
-
     <T extends Entity> void createEntity(T entity);
 
     void deleteEntity(String id);

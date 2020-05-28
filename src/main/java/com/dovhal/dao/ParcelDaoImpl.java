@@ -6,6 +6,8 @@ import com.dovhal.model.Entity;
 import com.dovhal.model.Parcel;
 import com.dovhal.model.Status;
 import com.dovhal.util.DBConnectionUtility;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -20,6 +22,8 @@ import java.util.Random;
  * @author vladd
  */
 public class ParcelDaoImpl implements EntityDao {
+    Logger logger = LogManager.getLogger(ParcelDaoImpl.class);
+
 
     @Override
     public <T extends Entity> void createEntity(T entity) {
@@ -30,8 +34,8 @@ public class ParcelDaoImpl implements EntityDao {
             int rand = Integer.parseInt(String.format("%05d", random.nextInt(99999)));
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             Parcel parcel = (Parcel) entity;
-            String id = parcel.getStartCity().substring(0,2).toUpperCase()
-                    + rand + parcel.getEndCity().substring(0,2).toUpperCase();
+            String id = parcel.getStartCity().substring(0, 2).toUpperCase()
+                    + rand + parcel.getEndCity().substring(0, 2).toUpperCase();
             preparedStatement.setString(1, id);
             preparedStatement.setString(2, parcel.getSenderName());
             preparedStatement.setString(3, parcel.getRecipientName());
@@ -95,7 +99,7 @@ public class ParcelDaoImpl implements EntityDao {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM parcels");
             while (resultSet.next()) {
-                    Parcel parcel = new Parcel();
+                Parcel parcel = new Parcel();
                 parcel.setId(resultSet.getString("parcelId"));
                 parcel.setSenderName(resultSet.getString("senderName"));
                 parcel.setRecipientName(resultSet.getString("recipientName"));
@@ -136,11 +140,11 @@ public class ParcelDaoImpl implements EntityDao {
 
     public List<City> getAllCities() {
         List<City> cityList = new ArrayList<>();
-        try(Connection connection = DBConnectionUtility.getDBConnection()) {
+        try (Connection connection = DBConnectionUtility.getDBConnection()) {
             String query = "SELECT * FROM cities";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 City city = new City();
                 city.setId(resultSet.getString("cityId"));
                 city.setCityName(resultSet.getString("cityName"));

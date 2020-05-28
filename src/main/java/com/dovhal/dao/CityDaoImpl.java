@@ -3,12 +3,16 @@ package com.dovhal.dao;
 import com.dovhal.model.City;
 import com.dovhal.model.Entity;
 import com.dovhal.util.DBConnectionUtility;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CityDaoImpl implements EntityDao {
+    Logger logger = LogManager.getLogger(CityDaoImpl.class);
+
     @Override
     public <T extends Entity> void createEntity(T entity) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {

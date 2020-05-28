@@ -1,4 +1,4 @@
 package com.dovhal.model;
 
-public class Entity {
+public abstract class Entity {
 }

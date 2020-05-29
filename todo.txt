@@ -5,4 +5,11 @@
 - Add progress-bar of parcel status
 - Restrict changing sender's city after creating parcel entity
 + Add JDBC Logger
-- Add page to display logs
++ Add page to display logs
++ Change date-formatting
+- Add sorting by value
+
+----BUGS
+- Problems with cyrillic;
+- Date in LOGS page is String, not Date obj;
+- After delete/insert and refreshing page, action is repeated;

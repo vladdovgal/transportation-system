@@ -1,54 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="error">
     <Appenders>
+        <!--Logging to Database-->
         <JDBC name="databaseAppender" tableName="transportation.LOGS">
             <ConnectionFactory class="com.dovhal.util.DBConnectionUtility"
-                               method="getDBConnection" />
-            <Column name="DATED" pattern="%d{dd MMM yyyy HH:mm:ss}" />
-            <Column name="LOGGER" pattern="%logger" />
-            <Column name="LEVEL" pattern="%level" />
-            <Column name="MESSAGE" pattern="%message" />
+                               method="getDBConnection"/>
+            <Column name="DATED" pattern="%d{DEFAULT}"/>
+            <Column name="LOGGER" pattern="%logger"/>
+            <Column name="LEVEL" pattern="%level"/>
+            <Column name="MESSAGE" pattern="%message"/>
         </JDBC>
+        <!--Logging to Console-->
+        <Console name="Console">
+            <PatternLayout
+                    pattern="%highlight{%-5level}{FATAL=bg_red} %style{%date{yyyy-MM-dd HH:mm:ss}}{blue} %class{1}:%L - %highlight{%msg} %xEx{short}%n"/>
+        </Console>
+        <!--Logging to File (in Tomcat home /logs)-->
+        <File name="MyFile" fileName="logs/app.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
     </Appenders>
     <Loggers>
         <Root level="debug">
             <AppenderRef ref="databaseAppender"/>
         </Root>
+        <Logger name="com.dovhal" level="info" additivity="true">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="com.dovhal" level="info" additivity="true">
+            <AppenderRef ref="MyFile"/>
+        </Logger>
     </Loggers>
 </Configuration>
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<Configuration status="info">-->
-<!--    <Appenders>-->
-
-<!--        <Console name="Console">-->
-<!--            <PatternLayout-->
-<!--                    pattern="%highlight{%-5level}{FATAL=bg_red} %style{%date{yyyy-MM-dd HH:mm:ss}}{blue} %class{1}:%L - %highlight{%msg} %xEx{short}%n"/>-->
-<!--        </Console>-->
-
-<!--        <File name="MyFile" fileName="logs/app.log">-->
-<!--            <PatternLayout>-->
-<!--                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>-->
-<!--            </PatternLayout>-->
-<!--        </File>-->
-
-<!--        <JDBC name="databaseAppender" tableName="transportation.LOGS">-->
-<!--            <DataSource jndiName="java:/comp/env/jdbc/LoggingDataSource" />-->
-<!--            <Column name="DATED" isEventTimestamp="true" />-->
-<!--            <Column name="logger" pattern="%logger" />-->
-<!--            <Column name="level" pattern="%level" />-->
-<!--            <Column name="message" pattern="%msg" />-->
-<!--        </JDBC>-->
-
-<!--    </Appenders>-->
-
-<!--    <Loggers>-->
-<!--        <Logger name="com.dovhal" level="info" additivity="true">-->
-<!--            <AppenderRef ref="MyFile"/>-->
-<!--        </Logger>-->
-
-<!--&lt;!&ndash;        <Root level="info">&ndash;&gt;-->
-<!--&lt;!&ndash;            <AppenderRef ref="Console"/>&ndash;&gt;-->
-<!--&lt;!&ndash;        </Root>&ndash;&gt;-->
-<!--    </Loggers>-->
-<!--</Configuration>-->
-

@@ -20,6 +20,11 @@ public class Parcel extends Entity{
 
     private String status;
 
+    private String timeCreated;
+
+    private String timeUpdated;
+
+
     public Parcel() {
     }
 
@@ -73,6 +78,22 @@ public class Parcel extends Entity{
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getTimeCreated() {
+        return timeCreated;
+    }
+
+    public void setTimeCreated(String timeCreated) {
+        this.timeCreated = timeCreated;
+    }
+
+    public String getTimeUpdated() {
+        return timeUpdated;
+    }
+
+    public void setTimeUpdated(String timeUpdated) {
+        this.timeUpdated = timeUpdated;
     }
 
     @Override

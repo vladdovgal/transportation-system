@@ -83,7 +83,6 @@ public class ParcelDaoImpl implements EntityDao {
             preparedStatement.setDouble(5, parcel.getWeight());
             preparedStatement.setString(6, parcel.getStatus());
             preparedStatement.setString(7, parcel.getId());
-
             preparedStatement.executeUpdate();
 
             logEntityInfo("Parcel " + parcel.getId() + " updated; Parcel info: " + parcel.toString());
@@ -97,7 +96,7 @@ public class ParcelDaoImpl implements EntityDao {
         List<Parcel> parcelList = new ArrayList<>();
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM parcels");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM parcels ORDER BY timeCreated DESC");
             while (resultSet.next()) {
                 Parcel parcel = new Parcel();
                 parcel.setId(resultSet.getString("parcelId"));
@@ -107,6 +106,8 @@ public class ParcelDaoImpl implements EntityDao {
                 parcel.setEndCity(resultSet.getString("endCity"));
                 parcel.setWeight(resultSet.getDouble("weight"));
                 parcel.setStatus(resultSet.getString("status"));
+                parcel.setTimeCreated(resultSet.getString("timeCreated"));
+                parcel.setTimeUpdated(resultSet.getString("timeUpdated"));
                 parcelList.add(parcel);
             }
         } catch (SQLException throwables) {
@@ -131,6 +132,8 @@ public class ParcelDaoImpl implements EntityDao {
                 parcel.setEndCity(resultSet.getString("endCity"));
                 parcel.setWeight(resultSet.getDouble("weight"));
                 parcel.setStatus(resultSet.getString("status"));
+                parcel.setTimeCreated(resultSet.getString("timeCreated"));
+                parcel.setTimeUpdated(resultSet.getString("timeUpdated"));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

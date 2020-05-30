@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.ref.ReferenceQueue;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,7 +54,43 @@ public class ParcelServlet extends HttpServlet {
             forward = INSERT_OR_EDIT;
             req.setAttribute("cities", citiesNames);
             req.setAttribute("statuss", statusList);
-        } else {
+        } else if (action.equalsIgnoreCase("listParcelsIdAsc")){
+            forward = lIST_PARCEL;
+            req.setAttribute("parcels", dao.getAllEntities("parcelId", "ASC"));
+        } else if (action.equalsIgnoreCase("listParcelsIdDesc")){
+            forward = lIST_PARCEL;
+            req.setAttribute("parcels", dao.getAllEntities("parcelId", "DESC"));
+        }else if (action.equalsIgnoreCase("listParcelsCity1Asc")){
+            forward = lIST_PARCEL;
+            req.setAttribute("parcels", dao.getAllEntities("startCity", "ASC"));
+        }
+        else if (action.equalsIgnoreCase("listParcelsCity1Desc")){
+            forward = lIST_PARCEL;
+            req.setAttribute("parcels", dao.getAllEntities("startCity", "DESC"));
+        }else if (action.equalsIgnoreCase("listParcelsCity2Asc")){
+            forward = lIST_PARCEL;
+            req.setAttribute("parcels", dao.getAllEntities("endCity", "ASC"));
+        }
+        else if (action.equalsIgnoreCase("listParcelsCity2Desc")){
+            forward = lIST_PARCEL;
+            req.setAttribute("parcels", dao.getAllEntities("endCity", "DESC"));
+        }
+        else if (action.equalsIgnoreCase("listParcelsWeightAsc")){
+            forward = lIST_PARCEL;
+            req.setAttribute("parcels", dao.getAllEntities("weight", "ASC"));
+        }
+        else if (action.equalsIgnoreCase("listParcelsWeightDesc")){
+            forward = lIST_PARCEL;
+            req.setAttribute("parcels", dao.getAllEntities("weight", "DESC"));
+        }
+        else if (action.equalsIgnoreCase("listParcelsStatusAsc")){
+            forward = lIST_PARCEL;
+            req.setAttribute("parcels", dao.getAllEntities("status", "ASC"));
+        }else if (action.equalsIgnoreCase("listParcelsStatusDesc")){
+            forward = lIST_PARCEL;
+            req.setAttribute("parcels", dao.getAllEntities("status", "DESC"));
+        }
+        else {
             forward = lIST_PARCEL;
             req.setAttribute("parcels", dao.getAllEntities());
         }

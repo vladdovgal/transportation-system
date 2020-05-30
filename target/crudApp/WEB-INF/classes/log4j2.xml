@@ -26,10 +26,10 @@
         <Root level="debug">
             <AppenderRef ref="databaseAppender"/>
         </Root>
-        <Logger name="com.dovhal" level="info" additivity="true">
+        <Logger name="com.dovhal" level="debug" additivity="true">
             <AppenderRef ref="Console"/>
         </Logger>
-        <Logger name="com.dovhal" level="info" additivity="true">
+        <Logger name="com.dovhal" level="debug" additivity="true">
             <AppenderRef ref="MyFile"/>
         </Logger>
     </Loggers>

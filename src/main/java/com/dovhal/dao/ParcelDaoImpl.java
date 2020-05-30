@@ -20,9 +20,10 @@ import java.util.Random;
  * It is used for implementation of CRUD and other methods
  *
  * @author vladd
+ * @
  */
 public class ParcelDaoImpl implements EntityDao {
-    Logger logger = LogManager.getLogger(ParcelDaoImpl.class);
+    static Logger  logger = LogManager.getLogger(ParcelDaoImpl.class);
 
 
     @Override
@@ -48,9 +49,8 @@ public class ParcelDaoImpl implements EntityDao {
             logEntityInfo("Parcel " + id + " from " + parcel.getStartCity().toString() +
                     " to " + parcel.getEndCity().toString() + " created");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            logger.error("SQLException was caught : See stacktrace above");
-        }
+            daoError("SQLException was caught. Stacktrace is available in console");
+            throwables.printStackTrace(); }
     }
 
     @Override
@@ -65,6 +65,7 @@ public class ParcelDaoImpl implements EntityDao {
             logEntityInfo("Parcel " + id + " from " + parcel.getStartCity().toString() +
                     " to " + parcel.getEndCity().toString() + " deleted");
         } catch (SQLException throwables) {
+            daoError("SQLException was caught. Stacktrace is available in console");
             throwables.printStackTrace();
         }
     }
@@ -87,6 +88,7 @@ public class ParcelDaoImpl implements EntityDao {
 
             logEntityInfo("Parcel " + parcel.getId() + " updated; Parcel info: " + parcel.toString());
         } catch (SQLException throwables) {
+            daoError("SQLException was caught. Stacktrace is available in console");
             throwables.printStackTrace();
         }
     }
@@ -96,6 +98,7 @@ public class ParcelDaoImpl implements EntityDao {
         List<Parcel> parcelList = new ArrayList<>();
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
             Statement statement = connection.createStatement();
+            // returns list of parcels sorted by creation time DESCENDING by default
             ResultSet resultSet = statement.executeQuery("SELECT * FROM parcels ORDER BY timeCreated DESC");
             while (resultSet.next()) {
                 Parcel parcel = new Parcel();
@@ -111,6 +114,7 @@ public class ParcelDaoImpl implements EntityDao {
                 parcelList.add(parcel);
             }
         } catch (SQLException throwables) {
+            daoError("SQLException was caught. Stacktrace is available in console");
             throwables.printStackTrace();
         }
         return parcelList;
@@ -136,6 +140,7 @@ public class ParcelDaoImpl implements EntityDao {
                 parcel.setTimeUpdated(resultSet.getString("timeUpdated"));
             }
         } catch (SQLException throwables) {
+            daoError("SQLException was caught. Stacktrace is available in console");
             throwables.printStackTrace();
         }
         return parcel;
@@ -155,13 +160,67 @@ public class ParcelDaoImpl implements EntityDao {
                 cityList.add(city);
             }
         } catch (SQLException throwables) {
+            daoError("SQLException was caught. Stacktrace is available in console");
             throwables.printStackTrace();
         }
         return cityList;
     }
 
+    // overloaded method for sorting page by certain column
+    public List<Parcel> getAllEntities(String orderBy, String order) {
+        List<Parcel> parcelList = new ArrayList<>();
+        try (Connection connection = DBConnectionUtility.getDBConnection()) {
+            // Prevent SQL Injection
+            String getColumnsQuery = "SELECT column_name FROM information_schema.columns WHERE table_name = 'parcels'";
+            Statement statement = connection.createStatement();
+            ResultSet resultSetCol = statement.executeQuery(getColumnsQuery);
+            List<String> columns = new ArrayList<>();
+            while (resultSetCol.next()) {
+                columns.add(resultSetCol.getString("COLUMN_NAME"));
+            }
+            if (columns.contains(orderBy)) {
+                String query = "SELECT * FROM parcels ORDER BY " + orderBy + " " + order;
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                daoDebug("\"Sql query\" "+query);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    Parcel parcel = new Parcel();
+                    parcel.setId(resultSet.getString("parcelId"));
+                    parcel.setSenderName(resultSet.getString("senderName"));
+                    parcel.setRecipientName(resultSet.getString("recipientName"));
+                    parcel.setStartCity(resultSet.getString("startCity"));
+                    parcel.setEndCity(resultSet.getString("endCity"));
+                    parcel.setWeight(resultSet.getDouble("weight"));
+                    parcel.setStatus(resultSet.getString("status"));
+                    parcel.setTimeCreated(resultSet.getString("timeCreated"));
+                    parcel.setTimeUpdated(resultSet.getString("timeUpdated"));
+                    parcelList.add(parcel);
+                }
+            } else {
+                daoWarn("SQL INJECTION DETECTED");
+                return null;
+            }
+        } catch (SQLException throwables) {
+            daoError("SQLException caught");
+            throwables.printStackTrace();
+        }
+        return parcelList;
+    }
+
     @Override
     public void logEntityInfo(String message) {
         logger.info(message);
+    }
+
+    public void daoDebug(String message) {
+        logger.debug(message);
+    }
+
+    public void daoWarn(String message) {
+        logger.warn(message);
+    }
+
+    public void daoError(String message) {
+        logger.error(message);
     }
 }

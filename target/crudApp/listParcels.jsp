@@ -14,12 +14,15 @@
 
     <link rel="stylesheet" type="text/css"
           href="css/style.css">
+    <script src="https://kit.fontawesome.com/943b69ee10.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 <div class="col-12">
     <div class="row header">
-        <div class="col-3">
-            <h1>Parcels List Page</h1>
+        <div class="col-4 row">
+            <i class="fas fa-shipping-fast fa-3x"></i>
+            <h1><b>Transportation System</b></h1>
         </div>
         <div>
             <a href="ParcelServlet.do?action=listParcels" class="top-toolbar-item">PARCELS</a>
@@ -38,13 +41,59 @@
     <table class="table col-12">
         <thead class="thead-dark">
         <tr>
-            <th>Parcel ID</th>
+            <th>
+                <i class="fas fa-barcode"></i>
+                Parcel ID
+                <%--                <a href="ParcelServlet.do?action=listParcelsIdAsc">--%>
+                <%--                   <i class="fas fa-sort-alpha-down"></i>--%>
+                <%--                </a>--%>
+                <%--                <a href="ParcelServlet.do?action=listParcelsIdDesc">--%>
+                <%--                    <i class="fas fa-sort-alpha-up-alt"></i>--%>
+                <%--                </a>--%>
+            </th>
             <th>Sender's Name</th>
             <th>Recipient's Name</th>
-            <th>From</th>
-            <th>To</th>
-            <th>Weight</th>
-            <th>Status</th>
+            <th>From
+                <div class="float-right">
+                    <a href="ParcelServlet.do?action=listParcelsCity1Asc">
+                        <i class="fas fa-sort-alpha-down"></i>
+                    </a>
+                    <a href="ParcelServlet.do?action=listParcelsCity1Desc">
+                        <i class="fas fa-sort-alpha-up-alt"></i>
+                    </a>
+                </div>
+            </th>
+            <th>To
+                <div class="float-right">
+                    <a href="ParcelServlet.do?action=listParcelsCity2Asc">
+                        <i class="fas fa-sort-alpha-down"></i>
+                    </a>
+                    <a href="ParcelServlet.do?action=listParcelsCity2Desc">
+                        <i class="fas fa-sort-alpha-up-alt"></i>
+                    </a>
+                </div>
+            </th>
+            <th><i class="fas fa-weight-hanging"></i> Weight
+                <div class="float-right">
+                    <a href="ParcelServlet.do?action=listParcelsWeightAsc">
+                        <i class="fas fa-sort-numeric-down"></i>
+                    </a>
+                    <a href="ParcelServlet.do?action=listParcelsWeightDesc">
+                        <i class="fas fa-sort-numeric-up-alt"></i>
+                    </a>
+                </div>
+            </th>
+            <th><i class="fas fa-spinner"></i> Status
+                <div class="float-right">
+                    <a href="ParcelServlet.do?action=listParcelsStatusAsc">
+                        <i class="fas fa-sort-alpha-down"></i>
+                    </a>
+                    <a href="ParcelServlet.do?action=listParcelsStatusDesc">
+                        <i class="fas fa-sort-alpha-up-alt"></i>
+                    </a>
+                </div>
+            </th>
+
             <th colspan="2">Action</th>
         </tr>
         </thead>
@@ -63,7 +112,7 @@
                 </td>
                 <td>
                     <button type="button" class="btn btn-info btn-lg" onclick="openModalInfo('${parcel.id}')">
-                        Info
+                        &nbsp;<i class="fas fa-info-circle"></i>&nbsp;
                     </button>
                     <div id="myModal${parcel.id}" class="modal">
                         <!-- Modal content -->
@@ -115,12 +164,12 @@
                     </div>
                     <a href="ParcelServlet.do?action=edit&parcelId=<c:out value="${parcel.id }"/>">
                         <button type="button" class="btn btn-dark btn-lg">
-                            Update
+                            Update <i class="fas fa-edit"></i>
                         </button>
                     </a>
                     <a href="ParcelServlet.do?action=delete&parcelId=<c:out value="${parcel.id }"/>">
                         <button type="button" class="btn btn-danger btn-lg">
-                            Delete
+                            Delete <i class="far fa-trash-alt"></i>
                         </button>
                     </a>
                 </td>

@@ -49,7 +49,7 @@
             <tr>
                 <td><c:out value="${log.dated}"/></td>
                 <td><c:out value="${log.logger}"/></td>
-                <td><c:out value="${log.level}"/></td>
+                <td><p data-status="${log.level}" class="level"></p>
                 <td><c:out value="${log.message}"/></td>
             </tr>
         </c:forEach>

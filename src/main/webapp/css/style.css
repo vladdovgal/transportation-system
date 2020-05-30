@@ -1,7 +1,15 @@
 * {
     font-family: 'Raleway', sans-serif;
 }
+html,
+body {
+    height: 100%;
+}
 
+
+.main-container{
+    margin-bottom: 30px;
+}
 .id {
     font-family: 'Montserrat', sans-serif;
 }
@@ -30,6 +38,7 @@ a:link.top-toolbar-item {
 a:hover.top-toolbar-item, a:active.top-toolbar-item {
     background-color: thistle;
     color: black;
+    text-decoration: none;
 }
 
 
@@ -133,4 +142,11 @@ input, select {
 .fa-sort-alpha-up-alt, .fa-sort-numeric-up-alt:before {
     content: "\f882";
     color: darkcyan;
+}
+.btn-clear{
+    background: rgba(255,255,255,0);
+    border: 2px solid crimson;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
 }

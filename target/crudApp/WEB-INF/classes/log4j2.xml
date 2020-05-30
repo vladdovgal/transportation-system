@@ -6,7 +6,7 @@
             <ConnectionFactory class="com.dovhal.util.DBConnectionUtility"
                                method="getDBConnection"/>
             <Column name="DATED" pattern="%d{DEFAULT}"/>
-            <Column name="LOGGER" pattern="%logger"/>
+            <Column name="LOGGER" pattern="%logger : %L"/>
             <Column name="LEVEL" pattern="%level"/>
             <Column name="MESSAGE" pattern="%message"/>
         </JDBC>

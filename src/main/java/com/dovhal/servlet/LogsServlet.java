@@ -25,6 +25,10 @@ public class LogsServlet extends HttpServlet {
         if (action.equalsIgnoreCase("listLogs")) {
             forward = LIST_LOGS;
             req.setAttribute("logs", dao.getAllEntities());
+        } else if (action.equalsIgnoreCase("clearLogs")){
+            forward = LIST_LOGS;
+            dao.clearLogs();
+            req.setAttribute("logs", dao.getAllEntities());
         }
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(forward);

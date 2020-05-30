@@ -5,7 +5,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Event Logs</title>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet"><x></x>    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+    <x></x>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
@@ -14,21 +16,26 @@
 
     <link rel="stylesheet" type="text/css"
           href="css/style.css">
+    <script src="https://kit.fontawesome.com/943b69ee10.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="col-12">
+<div class="col-12 main-container">
     <div class="row header">
-        <div class="col-3">
-            <h1>Cities List Page</h1>
+        <div class="col-4 row">
+            <i class="fas fa-shipping-fast fa-3x"></i>
+            <h1><b>Transportation System</b></h1>
         </div>
         <div>
-            <a href="ParcelServlet.do?action=listParcels" class="top-toolbar-item">PARCELS</a>
+            <a href="ParcelServlet.do?action=listParcels" class="top-toolbar-item">
+                <i class="fas fa-box-open"></i>&nbsp;PARCELS</a>
         </div>
         <div>
-            <a href="CityServlet.do?action=listCities" class="top-toolbar-item">CITIES</a>
+            <a href="CityServlet.do?action=listCities" class="top-toolbar-item">
+                <i class="fas fa-city"></i>&nbsp;CITIES</a>
         </div>
         <div>
-            <a href="LogsServlet.do?action=listLogs" class="top-toolbar-item">EVENT LOGS</a>
+            <a href="LogsServlet.do?action=listLogs" class="top-toolbar-item">
+                <i class="far fa-calendar-alt"></i>&nbsp;EVENT LOGS</a>
         </div>
         <div>
 
@@ -41,7 +48,13 @@
             <th>DATE & TIME</th>
             <th>LOGGER</th>
             <th>LEVEL</th>
-            <th>MESSAGE</th>
+            <th>MESSAGE
+                <a href="LogsServlet.do?action=clearLogs">
+                    <div class="float-right btn-clear">
+                        Clear logs <i class="fas fa-broom"></i>
+                    </div>
+                </a>
+            </th>
         </tr>
         </thead>
         <tbody>
@@ -56,4 +69,19 @@
         </tbody>
     </table>
 </div>
+    <footer class="footer py-2 bg-dark text-white-50">
+    <div class="container">
+        <!-- Grid row-->
+        <div class="text-center py-2 container">
+            <a href="https://github.com/vladdovgal/transportation-system"
+               style="margin-right:20px">
+                <i class="fab fa-github fa-3x"></i>
+            </a>
+            <a href="http://t.me/theonewhovlad">
+                <i class="fab fa-telegram fa-3x"></i>
+            </a>
+        </div>
+    </div>
+    <div class="footer-copyright text-center py-3">© 2020 Copyright: &nbsp; <b>@theonewhovlad</b></div>
+</footer>
 </body>

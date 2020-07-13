@@ -1,6 +1,5 @@
 package com.dovhal.util;
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -23,7 +22,7 @@ public class DBConnectionUtility {
             Class.forName(DRIVER_CLASS_NAME).getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             e.printStackTrace();
-            errorLog("Can't get JDBC Driver");
+            errorLog("Can't get JDBC Driver :" + e.getMessage());
         }
 
         try {
@@ -31,7 +30,7 @@ public class DBConnectionUtility {
             traceLog("Successfully connected to Database!");
         } catch (SQLException e) {
             e.printStackTrace();
-            errorLog("Can't connect to DB");
+            errorLog("Can't connect to DB :" + e.getMessage());
         }
 
         return result;

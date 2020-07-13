@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>All Cities</title>
+    <title>Cities</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
     <x></x>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -22,19 +22,19 @@
 <body>
 <div class="col-12 main-container ">
     <div class="row header">
-        <div class="col-4 row">
+        <div class="col-4 col-md-6 row">
             <i class="fas fa-shipping-fast fa-3x"></i>
             <h1><b>Transportation System</b></h1>
         </div>
-        <div>
+        <div class="col-md-2">
             <a href="ParcelServlet.do?action=listParcels" class="top-toolbar-item">
                 <i class="fas fa-box-open"></i>&nbsp;PARCELS</a>
         </div>
-        <div>
+        <div class="col-md-2">
             <a href="CityServlet.do?action=listCities" class="top-toolbar-item">
                 <i class="fas fa-city"></i>&nbsp;CITIES</a>
         </div>
-        <div>
+        <div class="col-md-2">
             <a href="LogsServlet.do?action=listLogs" class="top-toolbar-item">
                 <i class="far fa-calendar-alt"></i>&nbsp;EVENT LOGS</a>
         </div>
@@ -60,12 +60,12 @@
                 <td><c:out value="${city.cityAlias}"/></td>
                 <td>
                     <a href="CityServlet.do?action=edit&cityId=<c:out value="${city.id }"/>">
-                        <button type="button" class="btn btn-dark btn-lg">
+                        <button type="button" class="btn btn-dark btn-md">
                             Update
                         </button>
                     </a>
                     <a href="CityServlet.do?action=delete&cityId=<c:out value="${city.id }"/>">
-                        <button type="button" class="btn btn-danger btn-lg">
+                        <button type="button" class="btn btn-danger btn-md">
                             Delete
                         </button>
                     </a>

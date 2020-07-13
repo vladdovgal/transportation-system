@@ -7,7 +7,7 @@
 + Add JDBC Logger
 + Add page to display logs
 + Change date-formatting
-- Add sorting by value
++ Add sorting by value
 
 ----BUGS
 - Problems with cyrillic;

@@ -1,6 +1,5 @@
 package com.dovhal.servlet;
 
-//import com.dovhal.dao.EntityDAO;
 import com.dovhal.dao.ParcelDaoImpl;
 import com.dovhal.model.City;
 import com.dovhal.model.Parcel;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.ref.ReferenceQueue;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,21 +20,22 @@ import java.util.stream.Collectors;
 @WebServlet("/ParcelServlet.do")
 public class ParcelServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    public static final String lIST_PARCEL = "/listParcels.jsp";
-    public static final String INSERT_OR_EDIT = "/parcel.jsp";
+    public static final String lIST_PARCEL = "jsp/listParcels.jsp";
+    public static final String INSERT_OR_EDIT = "jsp/parcel.jsp";
+    public static final String FILTER = "jsp/filter.jsp";
     public static final List<String> statusList = Arrays.stream(Status.values())
             .map(Enum::toString)
             .collect(Collectors.toList());
     private ParcelDaoImpl dao = new ParcelDaoImpl();
 
 
-    @Override       
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String forward = "";
         String action = req.getParameter("action");
         List<City> cities = dao.getAllCities();
         List<String> citiesNames = cities.stream()
-                .map(e -> e.getCityName())
+                .map(City::getCityName)
                 .collect(Collectors.toList());
         if (action.equalsIgnoreCase("delete")) {
             forward = lIST_PARCEL;
@@ -54,41 +53,44 @@ public class ParcelServlet extends HttpServlet {
             forward = INSERT_OR_EDIT;
             req.setAttribute("cities", citiesNames);
             req.setAttribute("statuss", statusList);
-        } else if (action.equalsIgnoreCase("listParcelsIdAsc")){
+        } else if (action.equalsIgnoreCase("listParcelsIdAsc")) {
             forward = lIST_PARCEL;
             req.setAttribute("parcels", dao.getAllEntities("parcelId", "ASC"));
-        } else if (action.equalsIgnoreCase("listParcelsIdDesc")){
+        } else if (action.equalsIgnoreCase("listParcelsIdDesc")) {
             forward = lIST_PARCEL;
             req.setAttribute("parcels", dao.getAllEntities("parcelId", "DESC"));
-        }else if (action.equalsIgnoreCase("listParcelsCity1Asc")){
+        } else if (action.equalsIgnoreCase("listParcelsCity1Asc")) {
             forward = lIST_PARCEL;
             req.setAttribute("parcels", dao.getAllEntities("startCity", "ASC"));
-        }
-        else if (action.equalsIgnoreCase("listParcelsCity1Desc")){
+        } else if (action.equalsIgnoreCase("listParcelsCity1Desc")) {
             forward = lIST_PARCEL;
             req.setAttribute("parcels", dao.getAllEntities("startCity", "DESC"));
-        }else if (action.equalsIgnoreCase("listParcelsCity2Asc")){
+        } else if (action.equalsIgnoreCase("listParcelsCity2Asc")) {
             forward = lIST_PARCEL;
             req.setAttribute("parcels", dao.getAllEntities("endCity", "ASC"));
-        }
-        else if (action.equalsIgnoreCase("listParcelsCity2Desc")){
+        } else if (action.equalsIgnoreCase("listParcelsCity2Desc")) {
             forward = lIST_PARCEL;
             req.setAttribute("parcels", dao.getAllEntities("endCity", "DESC"));
-        }
-        else if (action.equalsIgnoreCase("listParcelsWeightAsc")){
+        } else if (action.equalsIgnoreCase("listParcelsWeightAsc")) {
             forward = lIST_PARCEL;
             req.setAttribute("parcels", dao.getAllEntities("weight", "ASC"));
-        }
-        else if (action.equalsIgnoreCase("listParcelsWeightDesc")){
+        } else if (action.equalsIgnoreCase("listParcelsWeightDesc")) {
             forward = lIST_PARCEL;
             req.setAttribute("parcels", dao.getAllEntities("weight", "DESC"));
-        }
-        else if (action.equalsIgnoreCase("listParcelsStatusAsc")){
+        } else if (action.equalsIgnoreCase("listParcelsStatusAsc")) {
             forward = lIST_PARCEL;
             req.setAttribute("parcels", dao.getAllEntities("status", "ASC"));
-        }else if (action.equalsIgnoreCase("listParcelsStatusDesc")){
+        } else if (action.equalsIgnoreCase("listParcelsStatusDesc")) {
             forward = lIST_PARCEL;
             req.setAttribute("parcels", dao.getAllEntities("status", "DESC"));
+        } else if (action.equalsIgnoreCase("filter")) {
+            forward = FILTER;
+//            req.setAttribute("cities", citiesNames);
+            req.setAttribute("statuss", statusList);
+        } else if(action.equalsIgnoreCase("filtered_parcels")){
+            forward = lIST_PARCEL;
+            String status = req.getParameter("status");
+            req.setAttribute("parcels", dao.getFilteredParcels(status));
         }
         else {
             forward = lIST_PARCEL;
@@ -100,23 +102,23 @@ public class ParcelServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       Parcel parcel = new Parcel();
-       parcel.setSenderName(req.getParameter("senderName"));
-       parcel.setRecipientName(req.getParameter("recipientName"));
-       parcel.setStartCity(req.getParameter("startCity"));
-       parcel.setEndCity(req.getParameter("endCity"));
-       parcel.setWeight(Double.parseDouble(req.getParameter("weight")));
-       parcel.setStatus(req.getParameter("status"));
-       String parcelId = req.getParameter("parcelId");
-
-       if (parcelId == null || parcelId.isEmpty()){
-           dao.createEntity(parcel);
-       } else {
-           parcel.setId(parcelId);
-           dao.updateEntity(parcel);
-       }
-       RequestDispatcher requestDispatcher = req.getRequestDispatcher(lIST_PARCEL);
-       req.setAttribute("parcels",dao.getAllEntities());
-       requestDispatcher.forward(req,resp);
+        Parcel parcel = new Parcel();
+        parcel.setSenderName(req.getParameter("senderName"));
+        parcel.setRecipientName(req.getParameter("recipientName"));
+        parcel.setStartCity(req.getParameter("startCity"));
+        parcel.setEndCity(req.getParameter("endCity"));
+        parcel.setWeight(Double.parseDouble(req.getParameter("weight")));
+        parcel.setStatus(req.getParameter("status"));
+        String parcelId = req.getParameter("parcelId");
+        // parcel id is null by default
+        if (parcelId == null || parcelId.isEmpty()) {
+            dao.createEntity(parcel);
+        } else {
+            parcel.setId(parcelId);
+            dao.updateEntity(parcel);
+        }
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(lIST_PARCEL);
+        req.setAttribute("parcels", dao.getAllEntities());
+        requestDispatcher.forward(req, resp);
     }
 }

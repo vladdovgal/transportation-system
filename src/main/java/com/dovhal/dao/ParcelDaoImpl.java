@@ -45,7 +45,6 @@ public class ParcelDaoImpl implements EntityDao {
             preparedStatement.setDouble(6, parcel.getWeight());
             preparedStatement.setString(7, parcel.getStatus());
             preparedStatement.executeUpdate();
-
             logEntityInfo("Parcel " + id + " from " + parcel.getStartCity().toString() +
                     " to " + parcel.getEndCity().toString() + " created");
         } catch (SQLException throwables) {
@@ -207,6 +206,32 @@ public class ParcelDaoImpl implements EntityDao {
         return parcelList;
     }
 
+    public List<Parcel> getFilteredParcels(String status){
+        List<Parcel> parcels = new ArrayList<>();
+        try(Connection connection = DBConnectionUtility.getDBConnection()){
+            String query = "SELECT * FROM parcels WHERE status=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, status);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Parcel parcel = new Parcel();
+                parcel.setId(resultSet.getString("parcelId"));
+                parcel.setSenderName(resultSet.getString("senderName"));
+                parcel.setRecipientName(resultSet.getString("recipientName"));
+                parcel.setStartCity(resultSet.getString("startCity"));
+                parcel.setEndCity(resultSet.getString("endCity"));
+                parcel.setWeight(resultSet.getDouble("weight"));
+                parcel.setStatus(resultSet.getString("status"));
+                parcel.setTimeCreated(resultSet.getString("timeCreated"));
+                parcel.setTimeUpdated(resultSet.getString("timeUpdated"));
+                parcels.add(parcel);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return parcels;
+    }
+
     @Override
     public void logEntityInfo(String message) {
         logger.info(message);
@@ -223,4 +248,5 @@ public class ParcelDaoImpl implements EntityDao {
     public void daoError(String message) {
         logger.error(message);
     }
+
 }

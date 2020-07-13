@@ -1,4 +1,6 @@
--- code to execute in Workbench (or IntellijIDEA) to create db and accompanying tables
+-- code to create db and accompanying tables
+-- user: root, pasword: Skleroz123_
+
 CREATE DATABASE transportation;
 USE transportation ;
 

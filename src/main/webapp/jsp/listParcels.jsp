@@ -19,19 +19,19 @@
 <body>
 <div class="col-12 main-container">
     <div class="row header">
-        <div class="col-4 row">
+        <div class="col-4 col-md-6 row">
             <i class="fas fa-shipping-fast fa-3x"></i>
             <h1><b>Transportation System</b></h1>
         </div>
-        <div>
+        <div class="col-md-2">
             <a href="ParcelServlet.do?action=listParcels" class="top-toolbar-item">
                 <i class="fas fa-box-open"></i>&nbsp;PARCELS</a>
         </div>
-        <div>
+        <div class="col-md-2">
             <a href="CityServlet.do?action=listCities" class="top-toolbar-item">
                 <i class="fas fa-city"></i>&nbsp;CITIES</a>
         </div>
-        <div>
+        <div class="col-md-2">
             <a href="LogsServlet.do?action=listLogs" class="top-toolbar-item">
                 <i class="far fa-calendar-alt"></i>&nbsp;EVENT LOGS</a>
         </div>
@@ -113,7 +113,7 @@
                     </p>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-info btn-lg" onclick="openModalInfo('${parcel.id}')">
+                    <button type="button" class="btn btn-info btn-md" onclick="openModalInfo('${parcel.id}')">
                         &nbsp;<i class="fas fa-info-circle"></i>&nbsp;
                     </button>
                     <div id="myModal${parcel.id}" class="modal">
@@ -165,15 +165,14 @@
                         </div>
                     </div>
                     <a href="ParcelServlet.do?action=edit&parcelId=<c:out value="${parcel.id }"/>">
-                        <button type="button" class="btn btn-dark btn-lg">
+                        <button type="button" class="btn btn-dark btn-md">
                             Update <i class="fas fa-edit"></i>
                         </button>
                     </a>
                     <a href="ParcelServlet.do?action=delete&parcelId=<c:out value="${parcel.id }"/>">
-                        <button type="button" class="btn btn-danger btn-lg">
+                        <button type="button" class="btn btn-danger btn-md">
                             Delete <i class="far fa-trash-alt"></i>
-                        </button>
-                    </a>
+                        </button></a>
                 </td>
 
             </tr>
@@ -183,6 +182,11 @@
     <a href="ParcelServlet.do?action=insert">
         <button type="button" class="btn btn-primary btn-lg">
             Create Parcel
+        </button>
+    </a>
+    <a href="ParcelServlet.do?action=filter">
+        <button class="btn btn-danger btn-lg">
+            Filter
         </button>
     </a>
 </div>
@@ -202,6 +206,6 @@
     <div class="footer-copyright text-center py-3">© 2020 Copyright: &nbsp; <b>@theonewhovlad</b></div>
 </footer>
 
-<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="../js/main.js"></script>
 </body>
 </html>

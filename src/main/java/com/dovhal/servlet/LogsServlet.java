@@ -14,7 +14,7 @@ import java.io.IOException;
 @WebServlet("/LogsServlet.do")
 public class LogsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    public static final String LIST_LOGS = "/listLogs.jsp";
+    public static final String LIST_LOGS = "jsp/listLogs.jsp";
     private LogDaoImpl dao = new LogDaoImpl();
 
     @Override
@@ -30,7 +30,6 @@ public class LogsServlet extends HttpServlet {
             dao.clearLogs();
             req.setAttribute("logs", dao.getAllEntities());
         }
-
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(forward);
         requestDispatcher.forward(req, resp);
     }

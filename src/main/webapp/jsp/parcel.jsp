@@ -59,7 +59,7 @@
                                name="recipientName"
                                value="<c:out value="${parcel.recipientName}"/>"
                                id="recipientName"
-                               placeholder="Enter name. For example: Jay">
+                               placeholder="Enter name. For example: Silent Bob">
                     </div>
                 </div>
 
@@ -114,7 +114,6 @@
                             <c:forEach items="${statuss}" var="status">
                                 <option value="${status}">${status}</option>
                             </c:forEach>
-
                         </select>
                     </div>
                 </div>

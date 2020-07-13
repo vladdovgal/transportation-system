@@ -1,8 +1,7 @@
 package com.dovhal.dao;
 
 import com.dovhal.model.Entity;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 
 import java.util.List;
 

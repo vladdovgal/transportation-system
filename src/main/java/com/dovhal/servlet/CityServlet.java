@@ -14,8 +14,8 @@ import java.io.IOException;
 @WebServlet("/CityServlet.do")
 public class CityServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    public static final String LIST_CITY = "/listCities.jsp";
-    public static final String INSERT_OR_EDIT = "/city.jsp";
+    public static final String LIST_CITY = "jsp/listCities.jsp";
+    public static final String INSERT_OR_EDIT = "jsp/city.jsp";
     private CityDaoImpl dao = new CityDaoImpl();
 
     @Override

@@ -15,7 +15,11 @@ body {
 }
 
 table, form {
-    font-size: 1.1em;
+    font-size: 1.0em;
+}
+
+td {
+    font-weight: bold;
 }
 
 a {

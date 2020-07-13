@@ -1,10 +1,21 @@
 package com.dovhal.model;
 
+/**
+ * <h1> City </h1>
+ * Class designed to describe city entity
+ *
+ * @author vladd
+ * @version 1.0
+ */
+
 public class City extends Entity {
     private String id;
 
     private String cityName;
 
+    /*
+    cityAlias - short name of the city
+     */
     private String cityAlias;
 
     public City() {
@@ -51,19 +62,3 @@ public class City extends Entity {
     }
 }
 
-//public enum City {
-//    LVIV("Lviv"),
-//    KYIV("Kyiv"),
-//    ODESSA("Odessa"),
-//    DNIPRO("Dnipro");
-//    private String value;
-//
-//    City(String value) {
-//        this.value = value;
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return value;
-//    }
-//}

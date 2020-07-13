@@ -7,11 +7,18 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * <h1> DBConnectionUtility </h1>
+ * DBConnectionUtility is class which implements feature of connecting to MySQL database
+ * Implements Singleton pattern.
+ */
 public class DBConnectionUtility {
     public static Logger logger = LogManager.getLogger(DBConnectionUtility.class);
 
+    // returns connection to MySQL DB
     public static Connection getDBConnection() {
         Connection result = null;
+        // required parameters to get connection
         String DB_CONN_URL = "jdbc:mysql://localhost:3306/transportation" +
                 "?useUnicode=true&serverTimezone=UTC&useSSL=false";
         String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver"; // remove "cj" if using 7 ore lower MYSQL version
@@ -25,6 +32,7 @@ public class DBConnectionUtility {
             errorLog("Can't get JDBC Driver :" + e.getMessage());
         }
 
+        // getting connection
         try {
             result = DriverManager.getConnection(DB_CONN_URL, USER_NAME, USER_PASSWORD);
             traceLog("Successfully connected to Database!");
@@ -36,6 +44,7 @@ public class DBConnectionUtility {
         return result;
     }
 
+    // logging errors
     private static void errorLog(String message) {
         logger.error(message + " | See stacktrace in Console!");
     }

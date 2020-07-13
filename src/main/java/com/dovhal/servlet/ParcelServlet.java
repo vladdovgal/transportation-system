@@ -17,26 +17,46 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
+/**
+ * <h1> ParcelServlet </h1>
+ * ParcelServlet is servlet designed for interacting with ParcelDao layer
+ * and transferring information to View layer (JSP page)
+ *
+ * @author vladd
+ * @version 1.0
+ */
 @WebServlet("/ParcelServlet.do")
 public class ParcelServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+
+    // some required constants for RequestDispatcher path
     public static final String lIST_PARCEL = "jsp/listParcels.jsp";
     public static final String INSERT_OR_EDIT = "jsp/parcel.jsp";
     public static final String FILTER = "jsp/filter.jsp";
+
+    // getting information about existing statuses of parcel (from Enum class)
     public static final List<String> statusList = Arrays.stream(Status.values())
             .map(Enum::toString)
             .collect(Collectors.toList());
+
+    // DarcelDAO implementation entity to interract with
     private ParcelDaoImpl dao = new ParcelDaoImpl();
 
 
+    // Processing of GET request
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String forward = "";
         String action = req.getParameter("action");
+        // get cities from DB
         List<City> cities = dao.getAllCities();
+
+        // get city names and convert to List<String>
         List<String> citiesNames = cities.stream()
                 .map(City::getCityName)
                 .collect(Collectors.toList());
+
+        // processing action
         if (action.equalsIgnoreCase("delete")) {
             forward = lIST_PARCEL;
             String parcelId = req.getParameter("parcelId");
@@ -53,7 +73,9 @@ public class ParcelServlet extends HttpServlet {
             forward = INSERT_OR_EDIT;
             req.setAttribute("cities", citiesNames);
             req.setAttribute("statuss", statusList);
-        } else if (action.equalsIgnoreCase("listParcelsIdAsc")) {
+        }
+        // processing of ORDER_BY buttons
+        else if (action.equalsIgnoreCase("listParcelsIdAsc")) {
             forward = lIST_PARCEL;
             req.setAttribute("parcels", dao.getAllEntities("parcelId", "ASC"));
         } else if (action.equalsIgnoreCase("listParcelsIdDesc")) {
@@ -100,6 +122,7 @@ public class ParcelServlet extends HttpServlet {
         requestDispatcher.forward(req, resp);
     }
 
+    // Processing of POST request
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Parcel parcel = new Parcel();
@@ -110,6 +133,7 @@ public class ParcelServlet extends HttpServlet {
         parcel.setWeight(Double.parseDouble(req.getParameter("weight")));
         parcel.setStatus(req.getParameter("status"));
         String parcelId = req.getParameter("parcelId");
+
         // parcel id is null by default
         if (parcelId == null || parcelId.isEmpty()) {
             dao.createEntity(parcel);

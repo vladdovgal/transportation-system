@@ -10,9 +10,21 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * CityDaoImpl.java is a class, which implements EntityDAO
+ * It is used for implementation of CRUD and other methods
+ *
+ * @author vladd
+ * @version 1.0
+ */
 public class CityDaoImpl implements EntityDao {
     Logger logger = LogManager.getLogger(CityDaoImpl.class);
 
+    /**
+     * <h3> Overridden method for creation of new city </h3>
+     *
+     * @param entity city data to insert into database
+     */
     @Override
     public <T extends Entity> void createEntity(T entity) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
@@ -31,6 +43,11 @@ public class CityDaoImpl implements EntityDao {
         }
     }
 
+    /**
+     * <h3> Overridden method for deletion of existing city </h3>
+     *
+     * @param id city identifier
+     */
     @Override
     public void deleteEntity(String id) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
@@ -45,7 +62,11 @@ public class CityDaoImpl implements EntityDao {
             logger.error("Caught SQLException; Something went wrong while deleting entity");
         }
     }
-
+    /**
+     * <h3> Overridden method for updating of existing city </h3>
+     *
+     * @param entity city object
+     */
     @Override
     public <T extends Entity> void updateEntity(T entity) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
@@ -66,6 +87,11 @@ public class CityDaoImpl implements EntityDao {
         }
     }
 
+    /**
+     * <h3> Overridden method for getting list of cities </h3>
+     *
+     * @return list of cities
+     */
     @Override
     public List<City> getAllEntities() {
         List<City> cityList = new ArrayList<>();
@@ -87,6 +113,11 @@ public class CityDaoImpl implements EntityDao {
         return cityList;
     }
 
+    /**
+     * <h3> Overridden method for getting city by it's id. </h3>
+     *
+     * @return city object
+     */
     @Override
     public City getEntityById(String id) {
         City city = new City();
@@ -106,6 +137,11 @@ public class CityDaoImpl implements EntityDao {
         return city;
     }
 
+    /**
+     * <h3> Overridden method for logging </h3>
+     *
+     * @param message  message for user about event or exception
+     */
     @Override
     public void logEntityInfo(String message) {
         logger.info(message);

@@ -1,9 +1,12 @@
 package com.dovhal.model;
 
 /**
- * Parcel.java represents entity "parcel"
+ * <h1> Parcel </h1>
+ * The Parcel class represents entity "parcel"
  *
  * @author vladd
+ * @version 1.0
+ * @since 15.04.2020
  */
 public class Parcel extends Entity{
     private String id;

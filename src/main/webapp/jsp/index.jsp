@@ -6,6 +6,6 @@
     <title>Crud App</title>
 </head>
 <body>
-    <jsp:forward page="/ParcelServlet.do?action=listParcel"></jsp:forward>
+    <jsp:forward page="/ParcelServlet.do?action=listParcels"></jsp:forward>
 </body>
 </html>

@@ -16,16 +16,22 @@ import java.util.Random;
 
 
 /**
- * ParcelDaoImpl.java is a class, which implements ParcelDao
+ * ParcelDaoImpl.java is a class, which implements EntityDAO;
+ *
  * It is used for implementation of CRUD and other methods
  *
  * @author vladd
- * @
+ * @version 1.0
  */
 public class ParcelDaoImpl implements EntityDao {
     static Logger  logger = LogManager.getLogger(ParcelDaoImpl.class);
 
-
+    /**
+     * <h3> Method designed for creation of new parcel </h3>
+     *
+     * @param entity entity with data to insert in database
+     * @return parcel entity
+     */
     @Override
     public <T extends Entity> void createEntity(T entity) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
@@ -52,6 +58,12 @@ public class ParcelDaoImpl implements EntityDao {
             throwables.printStackTrace(); }
     }
 
+    /**
+     * <h3> Deletes parcel by id </h3>
+     *
+     * @param id parcel identifier
+     * @return void
+     */
     @Override
     public void deleteEntity(String id) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
@@ -69,6 +81,11 @@ public class ParcelDaoImpl implements EntityDao {
         }
     }
 
+    /**
+     * <h3> Method to update (edit) parcel </h3>
+     *
+     * @return updated parcel
+     */
     @Override
     public <T extends Entity> void updateEntity(T entity) {
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
@@ -92,6 +109,11 @@ public class ParcelDaoImpl implements EntityDao {
         }
     }
 
+    /**
+     * <h3> Method to get all parcels from *parcels* table </h3>
+     *
+     * @return list of all parcels
+     */
     @Override
     public List<Parcel> getAllEntities() {
         List<Parcel> parcelList = new ArrayList<>();
@@ -119,6 +141,11 @@ public class ParcelDaoImpl implements EntityDao {
         return parcelList;
     }
 
+    /**
+     * <h3> Method to get parcel entity by it's identifier </h3>
+     * @param id parcel identifier
+     * @return parcel object
+     */
     @Override
     public Parcel getEntityById(String id) {
         Parcel parcel = new Parcel();
@@ -145,6 +172,11 @@ public class ParcelDaoImpl implements EntityDao {
         return parcel;
     }
 
+    /**
+     *  <h3> Method designed to get list of cities from database </h3>
+     *
+     * @return list of all cities
+     */
     public List<City> getAllCities() {
         List<City> cityList = new ArrayList<>();
         try (Connection connection = DBConnectionUtility.getDBConnection()) {
@@ -165,7 +197,13 @@ public class ParcelDaoImpl implements EntityDao {
         return cityList;
     }
 
-    // overloaded method for sorting page by certain column
+    /**
+     * <h3> Overloaded method for sorting page by certain column </h3>
+     *
+     * @param orderBy - column name in table
+     * @param order - "ASC" OR "DESC"
+     * @return - list of parcel in appropriate order
+     */
     public List<Parcel> getAllEntities(String orderBy, String order) {
         List<Parcel> parcelList = new ArrayList<>();
         try (Connection connection = DBConnectionUtility.getDBConnection()) {

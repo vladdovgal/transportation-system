@@ -114,7 +114,7 @@
                 </td>
                 <td>
                     <button type="button" class="btn btn-info btn-md" onclick="openModalInfo('${parcel.id}')">
-                        &nbsp;<i class="fas fa-info-circle"></i>&nbsp;
+                        &nbsp<i class="fas fa-info-circle"></i>&nbsp;
                     </button>
                     <div id="myModal${parcel.id}" class="modal">
                         <!-- Modal content -->
@@ -184,11 +184,12 @@
             Create Parcel
         </button>
     </a>
-    <a href="ParcelServlet.do?action=filter">
-        <button class="btn btn-danger btn-lg">
-            Filter
-        </button>
-    </a>
+<%--&lt;%&ndash; Unfinished feature    &ndash;%&gt;--%>
+<%--    <a href="ParcelServlet.do?action=filter">--%>
+<%--        <button class="btn btn-danger btn-lg">--%>
+<%--            Filter--%>
+<%--        </button>--%>
+<%--    </a>--%>
 </div>
 <footer class="footer py-2 bg-dark text-white-50">
     <div class="container">
@@ -206,6 +207,6 @@
     <div class="footer-copyright text-center py-3">© 2020 Copyright: &nbsp; <b>@theonewhovlad</b></div>
 </footer>
 
-<script type="text/javascript" src="../js/main.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

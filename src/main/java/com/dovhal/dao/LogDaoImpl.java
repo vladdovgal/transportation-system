@@ -13,9 +13,22 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * LogDaoImpl.java is a class, which implements ReadOnlyEntityDao
+ * It is used for implementation of Reading and Deleting logs feature
+ * Logs are automatically written to database (using LOG4J 2)
+ *
+ * @author vladd
+ * @version 1.0
+ */
 public class LogDaoImpl implements ReadOnlyEntityDao {
     static Logger logger = LogManager.getLogger(LogDaoImpl.class);
 
+    /**
+     * <h3> Method designed for getting list of all logs from LOGS table. </h3>
+     *
+     * @return list of all logs
+     */
     @Override
     public List<? extends Entity> getAllEntities() {
         List<LogItem> logItems = new ArrayList<>();
@@ -38,6 +51,9 @@ public class LogDaoImpl implements ReadOnlyEntityDao {
         return logItems;
     }
 
+    /**
+     * <h3> Method designed for clearing all data in LOGS table </h3>
+     */
     public void clearLogs() {
         try(Connection connection = DBConnectionUtility.getDBConnection()) {
             String query = "TRUNCATE TABLE LOGS";

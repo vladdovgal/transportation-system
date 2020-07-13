@@ -1,5 +1,12 @@
 package com.dovhal.model;
 
+/**
+ * <h1> Logging Item </h1>
+ * LogItem is class which is used to create
+ * entities to store event logs
+ * @author vladd
+ * @version 1.0
+ */
 public class LogItem extends Entity{
     private String dated;
     private String logger;

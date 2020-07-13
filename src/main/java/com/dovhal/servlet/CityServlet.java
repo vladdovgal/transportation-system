@@ -11,13 +11,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * <h1> CityServlet </h1>
+ * CityServlet is servlet designed for interacting with CityDAO layer
+ * and transferring information to View layer (JSP page)
+ *
+ * @author vladd
+ * @version 1.0
+ */
+
 @WebServlet("/CityServlet.do")
 public class CityServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+
+    // required constants for RequestDispatcher
     public static final String LIST_CITY = "jsp/listCities.jsp";
     public static final String INSERT_OR_EDIT = "jsp/city.jsp";
+
+    // CityDAO implementation entity to interact with database
     private CityDaoImpl dao = new CityDaoImpl();
 
+    // processing of GET request
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String forward = "";
@@ -39,11 +53,11 @@ public class CityServlet extends HttpServlet {
             forward = LIST_CITY;
             req.setAttribute("cities", dao.getAllEntities());
         }
-
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(forward);
         requestDispatcher.forward(req, resp);
     }
 
+    // processing of POST request
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         City city = new City();

@@ -2,6 +2,8 @@
 
 It is simple CRUD application designed to store data on parcels, as well as on cities that are part of the postal network.
 
+Application is being deployed on Heroku : https://transportation-system-project.herokuapp.com/ParcelServlet.do?action=listParcels
+
 Application features:
 - Read information about all parcels, add new parcels;
 - Edit and Delete existing parsels;

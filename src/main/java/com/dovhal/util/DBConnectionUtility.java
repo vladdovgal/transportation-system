@@ -19,18 +19,20 @@ public class DBConnectionUtility {
     public static Connection getDBConnection() {
         Connection result = null;
         // required parameters to get connection
-//        String DB_CONN_URL = "jdbc:mysql://localhost:3306/transportation" +
-//                "?useUnicode=true&serverTimezone=UTC&useSSL=false";
-//        String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver"; // remove "cj" if using 7 ore lower MYSQL version
-//        String USER_NAME = "root";
-//        String USER_PASSWORD = "Skleroz123_";
+        String DB_CONN_URL = "jdbc:mysql://localhost:3306/transportation" +
+                "?useUnicode=true&serverTimezone=UTC&useSSL=false";
+        String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver"; // remove "cj" if using 7 ore lower MYSQL version
+        String USER_NAME = "root";
+        String USER_PASSWORD = "Skleroz123_";
 
         // parameters for Heroku
+/*
         String DB_CONN_URL = "jdbc:mysql://zpfp07ebhm2zgmrm.chr7pe7iynqr.eu-west-1.rds.amazonaws.com\t:3306/xfdiqt2877rvhvan" +
                 "?useUnicode=true&serverTimezone=UTC&useSSL=false";
         String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver"; // remove "cj" if using 7 ore lower MYSQL version
         String USER_NAME = "snhuffkglmfaqw1s";
         String USER_PASSWORD = "xjj3rgj5s45944vj";
+*/
 
         try {
             Class.forName(DRIVER_CLASS_NAME).getDeclaredConstructor().newInstance();

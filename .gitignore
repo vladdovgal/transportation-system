@@ -1,4 +1,7 @@
 .idea/
 target/
-transportation-system.iml
 todo.txt
+
+*.iws
+*.iml
+*.ipr

@@ -30,36 +30,42 @@ Pattern: MVC (View layer is represented by Java Server Pages).
 1) Run SQL queries from 'transportation-system/src/main/resources/sql/queries.sql' file:
 :
 ```sql
+
+
 CREATE DATABASE transportation;
 USE transportation ;
-
 CREATE TABLE parcels (
-	parcelId VARCHAR (15) NOT NULL auto_increment,
-    senderName VARCHAR(25) DEFAULT NULL,
-    recipientName VARCHAR(25) DEFAULT NULL,
-    startCity VARCHAR(20) DEFAULT NULL,
+	parcelId VARCHAR (15) NOT NULL,
+    	senderName VARCHAR(25) DEFAULT NULL,
+    	recipientName VARCHAR(25) DEFAULT NULL,
+    	startCity VARCHAR(20) DEFAULT NULL,
 	endCity VARCHAR(20) DEFAULT NULL,
-    weight FLOAT(5) DEFAULT 1,
-    PRIMARY KEY(parcelID)
+    	weight FLOAT(5) DEFAULT 1,
+    	status varchar(20) default NULL,
+    	timeCreated timestamp default CURRENT_TIMESTAMP,
+    	timeUpdated timestamp ON UPDATE CURRENT_TIMESTAMP,
+    	PRIMARY KEY(parcelID)
 );
+
 
 CREATE TABLE cities(
 	cityId int(8) not null auto_increment,
-    cityName varchar(25) DEFAULT NULL,
-    cityAlias varchar(25) DEFAULT NULL,
-    PRIMARY KEY(cityId)
+    	cityName varchar(25) DEFAULT NULL,
+    	cityAlias varchar(25) DEFAULT NULL,
+    	PRIMARY KEY(cityId)
 );
 
 CREATE TABLE LOGS(
-    DATED   VARCHAR(40)    NOT NULL,
-    LOGGER  VARCHAR(50)    NOT NULL,
-    LEVEL   VARCHAR(10)    NOT NULL,
-    MESSAGE VARCHAR(1000)  NOT NULL
+    	DATED   VARCHAR(40)    NOT NULL,
+    	LOGGER  VARCHAR(50)    NOT NULL,
+    	LEVEL   VARCHAR(10)    NOT NULL,
+    	MESSAGE VARCHAR(1000)  NOT NULL
 );
+
 
 Run code in 'resources/sql/test-data.sql' to fill database with test data;
 ```
-Connect to DB using username (root) and password (Skleroz123_).
+Connect to DB using username and password.
 
 2) Add new (or use existing) Tomcat Server Run Configuration.
 

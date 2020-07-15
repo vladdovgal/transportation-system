@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%--    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">--%>
     <title>Event Logs</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">

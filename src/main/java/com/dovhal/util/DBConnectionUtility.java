@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,7 +21,7 @@ public class DBConnectionUtility {
         Connection result = null;
         // required parameters to get connection
         String DB_CONN_URL = "jdbc:mysql://localhost:3306/transportation" +
-                "?useUnicode=true&serverTimezone=UTC&useSSL=false";
+                "?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false";
         String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver"; // remove "cj" if using 7 ore lower MYSQL version
         String USER_NAME = "root";
         String USER_PASSWORD = "Skleroz123_";
@@ -61,4 +62,5 @@ public class DBConnectionUtility {
     private static void traceLog(String message) {
         logger.trace(message);
     }
+
 }

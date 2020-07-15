@@ -4,9 +4,10 @@ import com.dovhal.dao.ParcelDaoImpl;
 import com.dovhal.model.City;
 import com.dovhal.model.Parcel;
 import com.dovhal.model.Status;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +27,8 @@ import java.util.stream.Collectors;
  * @version 1.0
  */
 @WebServlet("/ParcelServlet.do")
-public class ParcelServlet extends HttpServlet {
+public class ParcelServlet extends HttpServlet implements Filter {
+    private static Logger logger = LogManager.getLogger(ParcelServlet.class);
     private static final long serialVersionUID = 1L;
 
     // some required constants for RequestDispatcher path
@@ -126,12 +128,17 @@ public class ParcelServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Parcel parcel = new Parcel();
-        parcel.setSenderName(req.getParameter("senderName"));
-        parcel.setRecipientName(req.getParameter("recipientName"));
-        parcel.setStartCity(req.getParameter("startCity"));
-        parcel.setEndCity(req.getParameter("endCity"));
+        parcel.setSenderName(new String(req.getParameter("senderName")
+                .getBytes("ISO-8859-1"),"UTF-8"));
+        parcel.setRecipientName(new String(req.getParameter("recipientName").
+                getBytes("ISO-8859-1"), "UTF-8"));
+        parcel.setStartCity(new String(req.getParameter("startCity")
+                .getBytes("ISO-8859-1"), "UTF-8"));
+        parcel.setEndCity(new String(req.getParameter("endCity")
+                .getBytes("ISO-8859-1"), "UTF-8"));
         parcel.setWeight(Double.parseDouble(req.getParameter("weight")));
-        parcel.setStatus(req.getParameter("status"));
+        parcel.setStatus(new String(req.getParameter("status")
+                .getBytes("ISO-8859-1"), "UTF-8"));
         String parcelId = req.getParameter("parcelId");
 
         // parcel id is null by default
@@ -144,5 +151,18 @@ public class ParcelServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(lIST_PARCEL);
         req.setAttribute("parcels", dao.getAllEntities());
         requestDispatcher.forward(req, resp);
+    }
+
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        chain.doFilter(request, response);
     }
 }

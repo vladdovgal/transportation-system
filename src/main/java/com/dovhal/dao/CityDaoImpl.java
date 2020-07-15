@@ -134,6 +134,7 @@ public class CityDaoImpl implements EntityDao {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        System.out.println();
         return city;
     }
 

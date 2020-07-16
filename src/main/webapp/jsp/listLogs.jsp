@@ -37,15 +37,12 @@
             <a href="LogsServlet.do?action=listLogs" class="top-toolbar-item">
                 <i class="far fa-calendar-alt"></i>&nbsp;EVENT LOGS</a>
         </div>
-        <div>
-
-        </div>
     </div>
 
-    <table class="table table-bordered message">
+    <table class="table table-bordered message col-12">
         <thead class="thead-dark">
         <tr>
-            <th>DATE & TIME</th>
+            <th style="min-width: 150px">DATE & TIME</th>
             <th>LOGGER</th>
             <th>LEVEL</th>
             <th>MESSAGE
@@ -69,15 +66,25 @@
         </tbody>
     </table>
 </div>
-    <footer class="footer py-2 bg-dark text-white-50">
+<footer class="footer py-2 bg-dark text-white-50">
     <div class="container">
         <!-- Grid row-->
         <div class="text-center py-2 container">
-            <a href="https://github.com/vladdovgal/transportation-system"
-               style="margin-right:20px">
+            <a  target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/vladdovgal/transportation-system"
+                style="margin-right:20px">
                 <i class="fab fa-github fa-3x"></i>
             </a>
-            <a href="http://t.me/theonewhovlad">
+            <a  target="_blank"
+                rel="noopener noreferrer"
+                href="https://www.linkedin.com/in/vladyslav-dovhal-517734164"
+                style="margin-right:20px">
+                <i class="fab fa-linkedin fa-3x"></i>
+            </a>
+            <a target="_blank"
+               rel="noopener noreferrer"
+               href="http://t.me/theonewhovlad">
                 <i class="fab fa-telegram fa-3x"></i>
             </a>
         </div>

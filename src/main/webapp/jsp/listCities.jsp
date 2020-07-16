@@ -14,10 +14,10 @@
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 
+
+    <script src="https://kit.fontawesome.com/943b69ee10.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css"
           href="css/style.css">
-    <script src="https://kit.fontawesome.com/943b69ee10.js" crossorigin="anonymous"></script>
-
 </head>
 <body>
 <div class="col-12 main-container ">
@@ -47,9 +47,9 @@
         <thead class="thead-dark">
         <tr>
             <th>City ID</th>
-            <th>City Name</th>
-            <th>City Alias</th>
-            <th colspan="2">Action</th>
+            <th class="city">City Name</th>
+            <th class="city">City Alias</th>
+            <th colspan="2" style="min-width:350px;">Action</th>
         </tr>
         </thead>
         <tbody>
@@ -61,12 +61,12 @@
                 <td>
                     <a href="CityServlet.do?action=edit&cityId=<c:out value="${city.id }"/>">
                         <button type="button" class="btn btn-dark btn-md">
-                            Update
+                            Update <i class="fas fa-edit"></i>
                         </button>
                     </a>
                     <a href="CityServlet.do?action=delete&cityId=<c:out value="${city.id }"/>">
                         <button type="button" class="btn btn-danger btn-md">
-                            Delete
+                            Delete <i class="far fa-trash-alt"></i>
                         </button>
                     </a>
                 </td>
@@ -85,11 +85,21 @@
     <div class="container">
         <!-- Grid row-->
         <div class="text-center py-2 container">
-            <a href="https://github.com/vladdovgal/transportation-system"
-               style="margin-right:20px">
+            <a  target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/vladdovgal/transportation-system"
+                style="margin-right:20px">
                 <i class="fab fa-github fa-3x"></i>
             </a>
-            <a href="http://t.me/theonewhovlad">
+            <a  target="_blank"
+                rel="noopener noreferrer"
+                href="https://www.linkedin.com/in/vladyslav-dovhal-517734164"
+                style="margin-right:20px">
+                <i class="fab fa-linkedin fa-3x"></i>
+            </a>
+            <a target="_blank"
+               rel="noopener noreferrer"
+               href="http://t.me/theonewhovlad">
                 <i class="fab fa-telegram fa-3x"></i>
             </a>
         </div>

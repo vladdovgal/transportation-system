@@ -11,10 +11,10 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
     <link rel="icon" href="imgs/delivery-track.png">
     <link rel="icon" href="imgs/delivery-track.png">
+
+    <script src="https://kit.fontawesome.com/943b69ee10.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css"
           href="css/style.css">
-    <script src="https://kit.fontawesome.com/943b69ee10.js" crossorigin="anonymous"></script>
-
 </head>
 <body>
 <div class="col-12 main-container">
@@ -53,9 +53,9 @@
                 <%--                    <i class="fas fa-sort-alpha-up-alt"></i>--%>
                 <%--                </a>--%>
             </th>
-            <th>Sender's Name</th>
-            <th>Recipient's Name</th>
-            <th>From
+            <th>Sender</th>
+            <th>Recipient</th>
+            <th style="min-width: 150px" >From
                 <div class="float-right">
                     <a href="ParcelServlet.do?action=listParcelsCity1Asc">
                         <i class="fas fa-sort-alpha-down"></i>
@@ -65,7 +65,7 @@
                     </a>
                 </div>
             </th>
-            <th>To
+            <th style="min-width: 150px">To
                 <div class="float-right">
                     <a href="ParcelServlet.do?action=listParcelsCity2Asc">
                         <i class="fas fa-sort-alpha-down"></i>
@@ -75,7 +75,8 @@
                     </a>
                 </div>
             </th>
-            <th><i class="fas fa-weight-hanging"></i> Weight
+            <th style="min-width: 150px">Weight
+<%--                <i class="fas fa-weight-hanging"></i> --%>
                 <div class="float-right">
                     <a href="ParcelServlet.do?action=listParcelsWeightAsc">
                         <i class="fas fa-sort-numeric-down"></i>
@@ -96,7 +97,7 @@
                 </div>
             </th>
 
-            <th colspan="2">Action</th>
+            <th colspan="2" style="min-width: 360px">Action</th>
         </tr>
         </thead>
         <tbody>
@@ -112,7 +113,7 @@
                     <p data-status="${parcel.status}" class="status">
                     </p>
                 </td>
-                <td>
+                <td style="padding-right: 0">
                     <button type="button" class="btn btn-info btn-md" onclick="openModalInfo('${parcel.id}')">
                         &nbsp<i class="fas fa-info-circle"></i>&nbsp;
                     </button>
@@ -195,11 +196,21 @@
     <div class="container">
         <!-- Grid row-->
         <div class="text-center py-2 container">
-                <a href="https://github.com/vladdovgal/transportation-system"
+                <a  target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://github.com/vladdovgal/transportation-system"
                 style="margin-right:20px">
                     <i class="fab fa-github fa-3x"></i>
                 </a>
-                <a href="http://t.me/theonewhovlad">
+            <a  target="_blank"
+                rel="noopener noreferrer"
+                href="https://www.linkedin.com/in/vladyslav-dovhal-517734164"
+                style="margin-right:20px">
+                <i class="fab fa-linkedin fa-3x"></i>
+            </a>
+                <a target="_blank"
+                   rel="noopener noreferrer"
+                   href="http://t.me/theonewhovlad">
                     <i class="fab fa-telegram fa-3x"></i>
                 </a>
         </div>
@@ -208,5 +219,15 @@
 </footer>
 
 <script type="text/javascript" src="js/main.js"></script>
+<%--<script>--%>
+<%--    if (window.screen.width < 1520){--%>
+<%--        let buttons = document.getElementsByClassName('dtn-md');--%>
+<%--        for (let i = 0; i < buttons.length; i++){--%>
+<%--            console.log(buttons[i].innerHTML);--%>
+
+<%--            buttons[i].innerHTML = "";--%>
+<%--        }--%>
+<%--    }--%>
+<%--</script>--%>
 </body>
 </html>

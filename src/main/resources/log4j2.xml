@@ -2,8 +2,8 @@
 <Configuration status="error">
     <Appenders>
         <!--Logging to Database-->
-<!--        <JDBC name="databaseAppender" tableName="transportation.LOGS">-->
-        <JDBC name="databaseAppender" tableName="xfdiqt2877rvhvan.LOGS">
+        <JDBC name="databaseAppender" tableName="transportation.LOGS">
+<!--        <JDBC name="databaseAppender" tableName="xfdiqt2877rvhvan.LOGS">-->
             <ConnectionFactory class="com.dovhal.util.DBConnectionUtility"
                                method="getDBConnection"/>
             <Column name="DATED" pattern="%d{DEFAULT}"/>

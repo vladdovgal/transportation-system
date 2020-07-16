@@ -1,10 +1,5 @@
 * {
     font-family: 'Montserrat', sans-serif;
-/*    dsas*/
-}
-html,
-body {
-    height: 100%;
 }
 
 
@@ -18,12 +13,10 @@ body {
 
 
 table, form {
-    font-size: 1.0em;
+    font-size: 0.9em;
 }
 
-td {
-    /*font-weight: bold;*/
-}
+
 
 a {
     color: snow;
@@ -38,18 +31,19 @@ a:link.top-toolbar-item {
     text-decoration: none;
     display: inline-block;
     font-weight: bold;
-    width: 230px;
-    margin-right: 20px;
+    min-width: 150px;
+    /*margin-right: 20px;*/
 }
 
 a:hover.top-toolbar-item, a:active.top-toolbar-item {
     background-color: thistle;
     color: black;
     text-decoration: none;
+
 }
 
 
-input, select {
+ select {
     margin-top: 10px;
 }
 
@@ -57,7 +51,7 @@ input, select {
     padding-bottom: 40px;
     margin-top: 20px;
     padding-top: 40px;
-    box-shadow: 1px 0 19px 0px #2e6da4;
+    box-shadow: 1px 0 19px 0 #2e6da4;
     font-size: 1.2em;
 }
 
@@ -128,7 +122,7 @@ input, select {
     width: 40%;
 }
 .table{
-    margin-bottom: 0rem;
+    margin-bottom: 1rem;
 }
 
 .close:hover,
@@ -140,7 +134,7 @@ input, select {
 
 .header {
     margin-top: 15px;
-    margin-left: 15px;
+    padding-left: 15px;
 }
 .fa-sort-alpha-down, .fa-sort-numeric-down:before {
     content: "\f15d";
@@ -161,3 +155,18 @@ input, select {
 /*.message {*/
 /*    font-family: 'Montserrat', sans-serif;*/
 /*}*/
+
+html,
+body {
+    height: 100%;
+    min-width: 1500px;
+    margin:0;
+    padding:0;
+}
+
+.city {
+    min-width:500px;
+    width: 500px;
+}
+
+

@@ -26,6 +26,11 @@ Personal project task for Epam University.
 
 Pattern: MVC (View layer is represented by Java Server Pages).
 
+## How it looks:
+![image](https://user-images.githubusercontent.com/39419270/119240148-a1bc8400-bb56-11eb-814d-f19267bc9a60.png)
+![image](https://user-images.githubusercontent.com/39419270/119240171-ba2c9e80-bb56-11eb-9a28-45321fce1bfe.png)
+
+
 ## How to run
 1) Run SQL queries from 'transportation-system/src/main/resources/sql/queries.sql' file:
 :
